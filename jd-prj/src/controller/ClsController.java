@@ -8,19 +8,19 @@ import dq.base.dto.ResultDto;
 import my.dao.MyDao;
 
 /**
- * ÕâÊÇÒ»¸ö¿ØÖÆÆ÷Àà£¬Æä×÷ÓÃÊÇÏò¿Í»§¶Ë·¢ËÍÊý¾Ý£¨json£©
+ * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½jsonï¿½ï¿½
  * @author Administrator
  *
  */
-@RestController //ÒýÈë¸Ã×¢½âºó£¬¸ÃÀà¾Í¿ÉÒÔÏòÏò¿Í»§¶Ë·¢ËÍjson¸ñÊ½Êý¾Ý
+@RestController //ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ó£¬¸ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ë·ï¿½ï¿½ï¿½jsonï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½
 public class ClsController {
 	
 	
-	@RequestMapping("/clsList")
+	@RequestMapping("/usrList")
 	public Object getAllCls() {
 		
-		//²éÑ¯ËùÓÐÊý¾Ý
-		return MyDao.queryMapList("select * from cls");
+		//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		return MyDao.queryMapList("select * from ims_shuihu108");
 	}
 	
 	@RequestMapping("/clsAddDo")
@@ -31,7 +31,7 @@ public class ClsController {
 				cls.getCls_name(),cls.getCls_remark());
 		
 		
-		return ResultDto.successResult("ÐÂÔöÉÌÆ··ÖÀà³É¹¦£¡");
+		return ResultDto.successResult("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 		
 	}
 

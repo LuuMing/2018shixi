@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" >
+<link rel="stylesheet" href="resources/css/font-awesome.min.css" >
+
+<style type="text/css">
+
+	.my-title{	
+		position:fixed;
+		left:0px;
+		top:0px;
+		z-index:10;/*块的叠放层级，层级较高的会压在层级较低的上面*/
+	
+		width:100%;
+		height:50px;
+		background-color: #112233;	
+		
+		color:#CCCCCC; /*块內文字颜色*/
+		font-size:24px;
+		font-weight:bold;/*文字加粗*/
+		font-family: 楷体;
+		line-height:50px;/*行高，文字在行高范围内自动居中*/
+		padding-left:3px;/*左侧内边距*/
+	}
+	
+	.my-nav{	
+		position:fixed;
+		left:0px;
+		top:50px;
+		bottom:30px;
+	
+		width:150px;
+		
+		background-color: #223344;	
+	}
+	
+	.my-content{	
+		position:fixed;
+		left:150px;
+		right:0px;
+		top:50px;
+		bottom:30px;
+		background-color: #EEEEEE;	
+	}
+	
+	.my-content iframe{
+		width:100%;
+		height:100%;
+		border:none;
+	}
+	
+	.my-copyright{	
+		position:fixed;
+		left:0px;		
+		bottom:0px;
+		
+		width:100%;
+		height:30px;
+		background-color: #112233;	
+	}
+	
+	.my-curr-user{
+	
+		position:absolute;/*相对于父元素的定位*/
+		right:10px;		
+		bottom:5px;
+		
+		font-family:宋体;
+		font-size:14px;
+		line-height: 20px;
+	
+	}
+	
+	.my-main-item{
+	
+		color:#AAAAAA;
+	
+		height:45px;
+		line-height:45px;
+		/* text-align:center; *//*文字水平居中*/
+		
+		padding-left:20px;
+		
+		border-bottom:1px solid #505050;
+		cursor: pointer;
+		
+		
+		
+	
+	}
+	
+	.my-main-item:hover{
+		color:white;
+	}
+	
+	
+	
+	.my-sub-item{
+		
+		display:block;/*设置为块级*/
+		
+		
+		text-align:center;/*文字水平居中*/	
+		
+		color:white;
+		
+		margin:5px 15px 5px 15px;  /*外边距 上右下左*/
+		border-radius: 10px;
+		padding:5px 0 5px 0;
+		
+		font-size:14px;
+	
+	}
+	
+	
+
+
+	.my-sub-item:link,.my-sub-item:visited{
+		text-decoration: none;/*去掉下划线*/
+	}
+	
+	.my-sub-item:hover{
+		font-weight: bold;
+		background-color: #00BBEE;
+		color:white;
+	}
+
+</style>
+
+
+</head>
+<body>
+
+<div class="my-title">
+
+	XXX电子商务系统
+	
+	<div class="my-curr-user dropdown">
+	
+		<span class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;" >当前用户：XXX</span>
+	
+		<div class="dropdown-menu" style="font-size: 13px;" >
+		   <a class="dropdown-item" href="#">个人信息</a>
+		   <a class="dropdown-item" href="#">修改密码</a>
+		   <a class="dropdown-item" href="#">安全退出</a>
+		</div>
+	
+	</div>
+
+
+</div>
+<div class="my-nav"  >
+
+
+	<div class="accordion" id="my-menu" style="color:white;">
+		
+		<!-- 菜单单元开始 -->
+		<div>
+			<div class="my-main-item" data-toggle="collapse" data-target="#my-safty" >
+				安全管理
+			</div>
+			
+			<div id="my-safty" class="collapse" data-parent="#my-menu" >
+				
+				<a href="#" class="my-sub-item" >用户管理</a>
+				<a href="#" class="my-sub-item" >密码重置</a>
+			
+			</div>
+		</div>
+		<!-- 菜单单元结束 -->
+		
+		<!-- 菜单单元开始 -->
+		<div>
+			<div class="my-main-item" data-toggle="collapse" data-target="#my-info" >
+				基础信息
+			</div>
+			
+			<div id="my-info" class="collapse" data-parent="#my-menu" >
+				
+				<a href="cls.html" target="contentFrame" class="my-sub-item" >商品分类</a>
+				<a href="#" class="my-sub-item" >商品信息</a>
+				
+			
+			</div>
+		</div>
+		<!-- 菜单单元结束 -->
+		
+		
+	</div>
+
+
+
+
+</div>
+<div class="my-content"  ><iframe name="contentFrame"></iframe></div>
+<div class="my-copyright"  ></div>
+
+
+
+<!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
+<script src="resources/js/jquery.min.js" ></script>
+<script src="resources/js/bootstrap.bundle.min.js"></script>
+<script src="resources/layer/layer.js" ></script>
+<script src="resources/js/sweetalert.min.js" ></script>
+<script type="text/javascript" src="resources/js/vue.min.js"></script>
+<script type="text/javascript" src="resources/js/my.js"></script>
+
+</body>
+</html>

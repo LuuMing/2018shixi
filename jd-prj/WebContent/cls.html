@@ -92,27 +92,7 @@
 	new Vue({
 		el:'#app',
 		data:{
-			clsList:[
-				
-				{
-					cls_id:1,
-					cls_name:'数码类',
-					cls_remark:null				
-				},
-				{
-					cls_id:2,
-					cls_name:'数码类',
-					cls_remark:null				
-				},
-				{
-					cls_id:3,
-					cls_name:'数码类',
-					cls_remark:null				
-				}
-				
-				
-			],
-			
+			clsList:[],
 			dlg:null,
 			cls:{}
 			
@@ -163,7 +143,6 @@
 		mounted(){//挂载完成的回调函数
 			
 			//从服务端获取数据
-			
 			My.loadData(
 					{
 						url:'clsList'

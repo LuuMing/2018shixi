@@ -31,7 +31,7 @@ public class ClsController {
 				cls.getCls_name(),cls.getCls_remark());
 		
 		
-		return ResultDto.successResult("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
+		return ResultDto.successResult("³É¹¦");
 		
 	}
 

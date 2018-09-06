@@ -1,10 +1,100 @@
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" >
+<link rel="stylesheet" href="resources/css/font-awesome.min.css" >
 </head>
 <body>
-=====>LOGIN!
-</body>
-</html>
+<!-- 增加窗口的内容 -->
+	<div id="cls-win-add" style="display:true;padding:15px;" >
+		<form>
+		  <div class="form-group">
+		    <label for="cls-add-name">请输入学号</label>
+		    <input v-model="usrs.account" type="text" class="form-control" id="cls-add-name" placeholder="9位数字">		   
+		  </div>
+		  <div class="form-group">
+		    <label for="cls-add-remark">请输入密码</label>
+		    <input v-model="usr.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>
+		  <button @click="clsAddDo" type="button" class="btn btn-primary">提交</button>
+		</form>
+	</div>
+	
+	<!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
+<script src="resources/js/jquery.min.js" ></script>
+<script src="resources/js/bootstrap.bundle.min.js"></script>
+<script src="resources/layer/layer.js" ></script>
+<script src="resources/js/sweetalert.min.js" ></script>
+<script type="text/javascript" src="resources/js/vue.min.js"></script>
+<script type="text/javascript" src="resources/js/my.js"></script>
+
+<script type="text/javascript">
+
+	new Vue({
+		el:'#app',
+		data:{
+			usr:{}
+		},
+		
+		methods:{
+			clsAddTo(){
+				this.dlg=My.open({
+					title:'新增商品分类',
+					contentId:'cls-win-add'					
+				});
+			},
+			
+			clsAddDo(){
+				console.log("=====>");
+				
+				My.operate(
+						{
+							title:'您确实要提交该数据吗？',
+							text:'如果。。。。，则。。。。。！',
+							url:'clsAddDo',
+							data:this.usr
+						},
+						
+						() => {
+							My.loadData(
+									{
+										url:'usrList'
+									},
+									
+									(data) => { //处理服务器数据的回调函数
+										this.usrList=data;
+									}
+							);
+							My.close(this.dlg);
+						}
+				
+				);
+			}
+			
+			
+		},
+		
+		mounted(){//挂载完成的回调函数
+			
+			//从服务端获取数据
+			My.loadData(
+					{
+						url:'usrList'
+					},
+					
+					(data) => { //处理服务器数据的回调函数
+						this.usrList=data;
+					}
+			);
+			
+		}
+		
+		
+	});
+
+</script>
+	
+	</body>
+	</html>

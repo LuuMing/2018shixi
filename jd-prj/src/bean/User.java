@@ -5,34 +5,23 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
-	Integer id;
-	String account;
-	String name;
-	String sex;
-	String pwd;
-	Integer usr_type;
-	@DateTimeFormat(pattern="yyyyy-MM-dd")
-	Date begDat;
-	String endDat;
-	Integer maxCap; 
-	Integer cnt;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getAccount() {
-		return account;
+	public String getUser_account() {
+		return user_account;
 	}
-	public void setAccount(String account) {
-		this.account = account;
+	public void setUser_account(String user_account) {
+		this.user_account = user_account;
 	}
-	public String getName() {
-		return name;
+	public String getUser_name() {
+		return user_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	public String getSex() {
 		return sex;
@@ -76,6 +65,18 @@ public class User {
 	public void setCnt(Integer cnt) {
 		this.cnt = cnt;
 	}
+	Integer id;
+	String user_account;
+	String user_name;
+	String sex;
+	String pwd;
+	Integer usr_type;
+	@DateTimeFormat(pattern="yyyyy-MM-dd")
+	Date begDat;
+	String endDat;
+	Integer maxCap; 
+	Integer cnt;
+	
 	
 	
 	

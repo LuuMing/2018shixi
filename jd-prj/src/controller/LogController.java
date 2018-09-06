@@ -46,7 +46,7 @@ public class LogController
 	@RequestMapping("/toLog")
 	public Object getPassword(User usr) 
 	{
-		if(MyDao.queryOne("select * from users where account = ? and pwd = ?", usr.getAccount(),usr.getPwd()) != null)
+		if(MyDao.queryOne("select * from users where user_account = ? and pwd = ?", usr.getUser_account(),usr.getPwd()) != null)
 			return ResultDto.successResult("≤È—Ø ß∞‹");
 		return ResultDto.failResult("≤È—Ø ß∞‹");
 	}

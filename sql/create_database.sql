@@ -1,11 +1,6 @@
-﻿create database if not exists LMS charset utf8;
+﻿drop database if exists LMS;
+create database if not exists LMS charset utf8;
 use LMS;
-drop table if exists users;
-drop table if exists books;
-drop table if exists lend;
-drop table if exists admin;
-drop table if exists admin_users;
-drop table if exists admin_books;
 create table users (
 	id int auto_increment,
 	user_account varchar(15) not null,
@@ -23,38 +18,41 @@ create table users (
 
 insert into users(user_account,user_name,sex,pwd) values ("151004113","卢明","男","151004113");
 
-select * from users;
 
 create table books
 (
 	id int auto_increment,
-  book_index varchar(15) not null,
-	book_name varchar(20) not null,
+	name varchar(20) not null, 
 	author varchar(50) not null,
-	cnt int not null,
 	primary key(id)
 );
+create table book_type
+(
+	id int auto_increment,
+	type_name varchar(50),
+	primary key(id)
+);
+insert into book_type(id,type_name) values(01,"考研类");
+insert into books(name,author) values ("考研数学","张宇");
 
-insert into books(book_index,book_name,author,cnt) values ("jdk12503","考研数学","张宇","3");
-
-select * from books;
 
 create table lend
 (
          id int auto_increment,
-         user_account varchar(15) not null,
-         book_index varchar(15) not null,
-         user_name varchar(15) not null,
-         book_name varchar(50) not null,
+         user_id int not null	,
+         book_id int not null,
          ldDat date,
-         reDat date,
-         reLend varchar(4),
+         endDat date,
+	 bakDat date,
+	 expired bool,
          log varchar(100),
-         primary key(id)
+         primary key(id),
+	 foreign key (user_id) references users(id),	
+	 foreign key (book_id) references books(id)
 );
 
 
-insert into lend(user_account,book_index,user_name,book_name) values("151004113","jdk12503","卢明","考研数学");
+insert into lend(user_id,book_id,ldDat,endDat) values(151004113,01,"2018-9-6","2018-9-10");
 
 select * from lend;
 
@@ -87,7 +85,6 @@ create table admin_books
 
 insert into admin_books(admin_account,book_index) values("admin0001","jdk12503");
 
-select * from admin_books;
 
 create table admin_users
 (
@@ -99,6 +96,3 @@ create table admin_users
 );
  
 insert into admin_users(admin_account,user_account) values("admin0001","jdk12503");   
-
-select * from admin_users;
-     

@@ -18,16 +18,44 @@
 		    <label for="cls-add-remark">请输入密码</label>
 		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
 		  </div>
-		  <button @click="clsAddDo" type="button" class="btn btn-primary">提交</button>
+		  <button @click="loginDo" type="button" class="btn btn-primary">提交</button>
+		  <button @click="regTo" type="button" class="btn btn-primary">注册</button>
 		</form>
 	</div>
 	
 	<!-- 错误提示 -->
 	<div id="error-win" style="display: none;padding:15px;" >
 		错误
-	
 	</div>
 	
+	
+	<!-- 注册页面 -->
+	<div id="reg-win" style="display: none;padding:15px;" >
+		<form>
+		  <div class="form-group">
+		    <label for="cls-add-name">请输入你的学号</label>
+		    <input v-model="user.user_account" type="text" class="form-control" id="cls-add-name" placeholder="9位数字">		   
+		  </div>
+		  <div class="form-group">
+		    <label for="cls-add-remark">请输入姓名</label>
+		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>
+		   <div class="form-group">
+		    <label for="cls-add-remark">请输入姓名</label>
+		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>
+		   <div class="form-group">
+		    <label for="cls-add-remark">请输入姓名</label>
+		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>
+		   <div class="form-group">
+		    <label for="cls-add-remark">请输入姓名</label>
+		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>
+		  <button @click="loginDo" type="button" class="btn btn-primary">提交</button>
+		</form>
+	</div>
+		
 	
 	<!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
 <script src="resources/js/jquery.min.js" ></script>
@@ -43,12 +71,12 @@
 		el:'#log-win',
 		data:{
 			user:{},
-			dlg:null,
+			errorDlg:null,
+			regDlg:null,
 		},
 		
 		methods:{
-			clsAddDo(){
-			
+			loginDo(){ //登录--start
 				My.ajax({
 							url:'toLog',
 							data:this.user,
@@ -58,13 +86,22 @@
 									console.log("成功");
 									window.location.href="./home.html";
 								}else{
-										this.dlg = My.open(
+										this.errorDlg = My.open(
 											{
 												title : 'Error',
 												 contentId : 'error-win'
 											});
 								}
 							}
+						});
+			},				//登录--end
+			
+			regTo() //打开注册页面--start
+			{
+				this.regDlg = My.open(
+						{
+							title : '注册',
+							 contentId : 'reg-win'
 						});
 			}
 		},

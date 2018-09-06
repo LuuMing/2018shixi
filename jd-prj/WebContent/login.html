@@ -22,6 +22,7 @@
 		  <button @click="regTo" type="button" class="btn btn-primary">注册</button>
 		</form>
 	</div>
+	 
 	
 	<!-- 错误提示 -->
 	<div id="error-win" style="display: none;padding:15px;" >
@@ -37,24 +38,54 @@
 		    <input v-model="user.user_account" type="text" class="form-control" id="cls-add-name" placeholder="9位数字">		   
 		  </div>
 		  <div class="form-group">
-		    <label for="cls-add-remark">请输入姓名</label>
+		    <label for="cls-add-remark">请输入你的密码</label>
 		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
 		  </div>
 		   <div class="form-group">
-		    <label for="cls-add-remark">请输入姓名</label>
-		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		    <label for="cls-add-remark">请输入你的姓名</label>
+		    <input v-model="user.name" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
 		  </div>
-		   <div class="form-group">
-		    <label for="cls-add-remark">请输入姓名</label>
-		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
-		  </div>
-		   <div class="form-group">
-		    <label for="cls-add-remark">请输入姓名</label>
-		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
-		  </div>
-		  <button @click="loginDo" type="button" class="btn btn-primary">提交</button>
-		</form>
-	</div>
+		  
+		  
+		  
+		  
+		  
+		  	<div class="form-group">
+		  	<label for="cls-add-remark">请选择你的性别</label>
+				<div class="input-group">
+					<input type="text" class="form-control">
+					<span class="input-add-remark">
+						<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+							选择性别
+						</button>
+						<ul class="dropdown-menu" role="menu">
+		            <li><a href="#">男</a></li>
+		            <li><a href="#">女</a></li>
+	             	<li class="divider"></li>
+	             	<li><a href="#">？？？</a></li>
+	                </ul>
+					</span>
+			</div><!-- /input-group -->
+			</div><!-- /.col-lg-6 -->
+	
+	       <div class="form-group">
+		  	<label for="cls-add-remark">学生or老师</label>
+				<div class="input-group">
+					<input type="text" class="form-control">
+					<span class="input-add-remark">
+						<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+							选择职业
+						</button>
+						<ul class="dropdown-menu" role="menu">
+		            <li><a href="#">学生</a></li>
+		            <li><a href="#">老师</a></li>
+	             	
+	                </ul>
+					</span>
+			</div><!-- /input-group -->
+			</div><!-- /.col-lg-6 -->
+	 
+		  <center><button @click="regDo" type="button" class="btn btn-primary">注册</button></center>
 		
 	
 	<!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->

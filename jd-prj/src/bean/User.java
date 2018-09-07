@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
+	Integer id;
 	public Integer getId() {
 		return id;
 	}
@@ -35,11 +36,11 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public Integer getUsr_type() {
-		return usr_type;
+	public String getUser_type() {
+		return user_type;
 	}
-	public void setUsr_type(Integer usr_type) {
-		this.usr_type = usr_type;
+	public void setUser_type(String user_type) {
+		this.user_type = user_type;
 	}
 	public Date getBegDat() {
 		return begDat;
@@ -65,20 +66,15 @@ public class User {
 	public void setCnt(Integer cnt) {
 		this.cnt = cnt;
 	}
-	Integer id;
 	String user_account;
 	String user_name;
 	String sex;
 	String pwd;
-	Integer usr_type;
-	@DateTimeFormat(pattern="yyyyy-MM-dd")
+	String user_type;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date begDat;
 	String endDat;
 	Integer maxCap; 
 	Integer cnt;
-	
-	
-	
-	
 	
 }

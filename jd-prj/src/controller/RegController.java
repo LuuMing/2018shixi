@@ -17,20 +17,25 @@ public class RegController
 	public Object reg(User usr) 
 	{
 		if(MyDao.queryOne("select * from users where user_account = ?", usr.getUser_account()) != null)
-			return ResultDto.failResult("注册失败");
+			return ResultDto.failResult("账户已注册");
 		else
 		{
+			if( !usr.valid() )
+			{
+				return ResultDto.failResult("请填写完整");
+			}
+			int maxCap = 0;
 			Date current =  new java.sql.Date(new java.util.Date().getTime());
 	        Calendar calendar = Calendar.getInstance();
 	        calendar.setTime(current);
 			switch(usr.getUser_type()) 
 			{
-				case "学生" : 	calendar.add(Calendar.YEAR, 1);					break;
-				case "教师":	calendar.add(Calendar.YEAR, 2);				   break;
+				case "学生" : 	calendar.add(Calendar.YEAR, 1);	 maxCap = 10;				break;
+				case "教师":	calendar.add(Calendar.YEAR, 2);	 maxCap = 30;				   break;
 				default:			calendar.add(Calendar.YEAR, 1);
 			}
-			MyDao.update("insert into users(user_account,user_name,sex,pwd,usr_type,begDat,endDat) values(?,?,?,?,?,?,?)", 
-					usr.getUser_account(),usr.getUser_name(),usr.getSex(),usr.getPwd(),usr.getUser_type(),current,calendar.getTime());
+			MyDao.update("insert into users(user_account,user_name,sex,pwd,usr_type,begDat,endDat,maxCap,cnt) values(?,?,?,?,?,?,?,?,?)", 
+					usr.getUser_account(),usr.getUser_name(),usr.getSex(),usr.getPwd(),usr.getUser_type(),current,calendar.getTime(),maxCap,0);
 			return ResultDto.successResult("注册成功");
 		}
 	}

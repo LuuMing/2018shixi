@@ -1,3 +1,5 @@
 /.metadata/
 /tomcat
 /.recommenders/
+*.class
+.classpath

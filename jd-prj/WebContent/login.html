@@ -38,10 +38,10 @@
 
 </head>
 <body>
-
+<div id="app">
   
 <!-- 登录窗口 -->
-    <div id="app" class="my-center-block">
+    <div class="my-center-block">
 	<div id="log-win" style="display:block;padding:15px;" >
 		<form>
 		  <div class="form-group">
@@ -56,12 +56,18 @@
 		  <button @click="regTo" type="button" class="btn btn-primary">注册</button>
 		</form>
 	</div>
-	
+	 </div>
 	
 	<!-- 错误提示 -->
 	<div id="error-win" style="display: none;padding:15px;" >
 		错误
 	</div>
+
+	<!-- 成功提示 -->
+	<div id="success-win" style="display: none;padding:15px;" >
+		注册成功
+	</div>
+	
 	
 	<!-- 注册页面 -->
 	<div id="reg-win" style="display: none;padding:15px;" >
@@ -99,8 +105,8 @@
 		  <center><button @click="regDo" type="button" class="btn btn-primary">确认</button></center>
 		</form>
 		</div>
- </div>
 
+</div>
 	<!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
 <script src="resources/js/jquery.min.js" ></script>
 <script src="resources/js/bootstrap.bundle.min.js"></script>
@@ -116,7 +122,7 @@
 			user:{},
 			errorDlg:null,
 			regDlg:null,
-			
+			successDlg:null
 		},
 		
 		methods:{
@@ -127,8 +133,8 @@
 							handler(result){
 								if(result.success){
 									console.log("成功");
-									window.location.href="./home.html";
-								}else{
+									window.location.href="./home.html";}
+								else{
 										this.errorDlg = My.open(
 											{
 												title : 'Error',
@@ -160,7 +166,17 @@
 				console.log(result);
 				if(result.success){
 					console.log("成功");
-					window.location.href="./home.html";
+					this.regDlg = My.open(
+							{
+								title : '注册成功',
+								 contentId : 'success-win'
+							});
+					 setTimeout(
+                             ()=>{
+                                     window.location.href='login.html';
+                             },
+                             1500                                     
+                     );
 				}else{
 					console.log("失败");
 						this.errorDlg = My.open(

@@ -38,7 +38,7 @@
 
 </head>
 <body>
-
+<div id="app">
   
 <!-- 登录窗口 -->
     <div class="my-center-block">
@@ -63,7 +63,6 @@
 		错误
 	</div>
 	
-	
 	<!-- 注册页面 -->
 	<div id="reg-win" style="display: none;padding:15px;" >
 		<form>
@@ -77,32 +76,31 @@
 		  </div>
 		   <div class="form-group">
 		    <label for="cls-add-remark">请输入你的姓名</label>
-		    <input v-model="user.name" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
-		  </div>
-		  
-		 <label for="name">选择你的性别</label>
-<div>
-	<label class="radio-inline">
-		<input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked> 男
-	</label>
-	<label class="radio-inline">
-		<input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 女
-	</label>
+		    <input v-model="user.user_name" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>  
+		 <label >选择你的性别</label>
+		<div>
+			<label >
+				<input type="radio" name="sexSelect" v-model="user.sex"  value="男" > 男
+			</label>
+			<label >
+				<input type="radio" name="sexSelect" v-model="user.sex"  value="女"> 女
+			</label>
+			</div>
+	 	<label>选择你职业</label>
+		<div>
+		<label >
+		<input type="radio" name="typeSelect"  v-model = "user.user_type" value="学生" >学生
+		</label>
+		<label >
+		<input type="radio" name="typeSelect"  v-model = "user.user_type"  value="教师"> 教师
+		</label>	
+		</div>       
+		  <center><button @click="regDo" type="button" class="btn btn-primary">确认</button></center>
+		</form>
+		</div>
+
 </div>
-	
-	 <label for="name">选择你职业</label>
-<div>
-	<label class="radio-inline">
-		<input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked>学生
-	</label>
-	<label class="radio-inline">
-		<input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 教师
-	</label>
-</div>       
-	 
-		  <center><button @click="regDo" type="button" class="btn btn-primary">注册</button></center>
-		
-	
 	<!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
 <script src="resources/js/jquery.min.js" ></script>
 <script src="resources/js/bootstrap.bundle.min.js"></script>
@@ -112,9 +110,8 @@
 <script type="text/javascript" src="resources/js/my.js"></script>
 
 <script type="text/javascript">
-
 	new Vue({
-		el:'#log-win',
+		el:'#app',
 		data:{
 			user:{},
 			errorDlg:null,
@@ -125,10 +122,9 @@
 		methods:{
 			loginDo(){ //登录--start
 				My.ajax({
-							url:'toLog',
+							url:'logIn',
 							data:this.user,
 							handler(result){
-								console.log(result);
 								if(result.success){
 									console.log("成功");
 									window.location.href="./home.html";
@@ -151,6 +147,31 @@
 							 contentId : 'reg-win'
 						});
 			}
+		,				//打开注册页面--end
+		
+		regDo() //确认注册--start
+		{
+			console.log("去注册");
+			console.log(this.user);
+			My.ajax({
+			url: 'toReg',
+			data: this.user,
+			handler(result){
+				console.log(result);
+				if(result.success){
+					console.log("成功");
+					window.location.href="./home.html";
+				}else{
+					console.log("失败");
+						this.errorDlg = My.open(
+							{
+								title : '注册失败',
+								 contentId : 'error-win'
+							});
+					}
+			}
+			});
+		},		//	确认注册--end
 		},
 		
 		mounted(){//挂载完成的回调函数

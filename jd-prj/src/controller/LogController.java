@@ -2,6 +2,8 @@ package controller;
 
 import java.io.Console;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,21 +45,26 @@ import my.dao.Rec;
 @RestController
 public class LogController
 {
-	@RequestMapping("/toLog")
-	public Object getPassword(User usr) 
+	@RequestMapping("/logIn")
+	public Object loginin(User usr,HttpSession session) 
 	{
 		if(MyDao.queryOne("select * from users where user_account = ? and pwd = ?", usr.getUser_account(),usr.getPwd()) != null)
-			return ResultDto.successResult("查询失败");
-		return ResultDto.failResult("查询失败");
+		{
+			//Session--start
+			session.setAttribute("loginUserId", usr.getId());
+			//Session--end
+			return ResultDto.successResult("查询成功");
+		}
+		else 
+		{
+			return ResultDto.failResult("查询失败");
+		}
+	}
+	@RequestMapping("/logOut")
+	public Object logout(HttpSession session) 
+	{
+		session.removeAttribute("loginUserId");
+		return ResultDto.successResult("注销成功");
 	}
 }
-
-
-
-
-
-
-
-
-
 

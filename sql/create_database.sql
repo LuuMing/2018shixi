@@ -7,14 +7,14 @@ create table users (
 	user_name varchar(15) not null,
 	sex varchar(4) not null,
 	pwd varchar (20) not null,
-	usr_type int,
+	usr_type varchar(20),
 	begDat date,
 	endDat date,
 	maxCap int,
 	cnt int,
 	log varchar(100),
 	primary key(id)
-) ;
+);
 
 insert into users(user_account,user_name,sex,pwd) values ("151004113","卢明","男","151004113");
 

@@ -80,14 +80,14 @@
 	
 		color:#AAAAAA;
 	
-		height:45px;
-		line-height:45px;
+		height:50px;
+		line-height:50px;
 		/* text-align:center; *//*文字水平居中*/
 		
 		padding-left:20px;
 		
-		border-bottom:1px solid #505050;
-		cursor: pointer;
+		border-bottom:2px solid #505050;
+		cursor: pointer;/*光标手型*/
 		
 		
 		
@@ -105,7 +105,7 @@
 		display:block;/*设置为块级*/
 		
 		
-		text-align:center;/*文字水平居中*/	
+		/*text-align:center;*//*文字水平居中*/
 		
 		color:white;
 		
@@ -125,6 +125,7 @@
 	}
 	
 	.my-sub-item:hover{
+		text-align:center;
 		font-weight: bold;
 		background-color: #00BBEE;
 		color:white;
@@ -143,7 +144,7 @@
 	<div class="my-curr-user dropdown">
 	
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		  <i class="fa fa-user" aria-hidden="true"></i>  当前登录的用户为xxx
+		  <i class="fa fa-user" aria-hidden="true"></i>  欢迎您的登录，管理员：xxx
 		</button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		    <a class="dropdown-item" href="#"><i class="fa fa-address-card" aria-hidden="true"></i> 个人信息</a>
@@ -167,13 +168,13 @@
 		<!-- 菜单单元开始 -->
 		<div>
 			<div class="my-main-item" data-toggle="collapse" data-target="#my-safty" >
-				安全管理
+				<i class="fa fa-user-circle" aria-hidden="true"></i> 安全管理
 			</div>
 			
-			<div id="my-safty" class="collapse" data-parent="#my-menu" >
+			<div id="my-safty" class="collapse " style="padding-left:30px;" data-parent="#my-menu" >
 				
-				<a href="#" class="my-sub-item" >用户管理</a>
-				<a href="#" class="my-sub-item" >密码重置</a>
+				<a href="#" class="my-sub-item" ><i class="fa fa-users"></i> 用户管理</a>			
+				<a href="#" class="my-sub-item" ><i class="fa fa-unlock-alt"></i> 用户密码重置</a>
 			
 			</div>
 		</div>
@@ -181,19 +182,33 @@
 		
 		<!-- 菜单单元开始 -->
 		<div>
-			<div class="my-main-item" data-toggle="collapse" data-target="#my-info" >
-				基础信息
+			<div class="my-main-item" data-toggle="collapse"  data-target="#my-info" >
+				<i class="fa fa-envelope-square" aria-hidden="true"></i> 个人消息
 			</div>
 			
-			<div id="my-info" class="collapse" data-parent="#my-menu" >
+			<div id="my-info" class="collapse " style="padding-left:30px;" data-parent="#my-menu" >
 				
-				<a href="#" target="contentFrame" class="my-sub-item" >商品分类</a>
-				<a href="#" class="my-sub-item" >商品信息</a>
-				
+				<a href="#" target="null" class="my-sub-item" ><i class="fa fa-envelope-open-o"></i> 未读消息</a>
+				<a href="#" class="my-sub-item" ><i class="fa fa-envelope-o"></i> 已读消息</a>
+				<a href="#" class="my-sub-item" ><i class="fa fa-trash-o"></i> 垃圾箱</a>
 			
 			</div>
 		</div>
 		<!-- 菜单单元结束 -->
+		
+		<!-- 菜单单元开始 -->
+		<div>
+			<div class="my-main-item" data-toggle="collapse" data-target="#my-books" >
+				<i class="fa fa-leanpub"></i> 书籍管理
+			</div>
+			
+			<div id="my-books" class="collapse " style="padding-left:30px;" data-parent="#my-menu" >
+				
+				<a href="#" class="my-sub-item" ><i class="fa fa-users"></i> 书馆书库</a>			
+				<a href="#" class="my-sub-item" ><i class="fa fa-warning"></i> 超时提醒</a>
+				<a href="#" class="my-sub-item" ><i class="fa fa-bookmark"></i> 丢失报备</a>
+			</div>
+		</div>
 		
 		
 	</div>
@@ -203,7 +218,19 @@
 
 </div>
 <div class="my-content"  ><iframe name="contentFrame"></iframe></div>
-<div class="my-copyright"  ></div>
+<div class="my-copyright row align-items-center px-5" style="height:80px;"  >
+	<div class="col-2">
+		
+	</div>
+	
+	<div class="col-8" style="color:#999999;text-align:center;">
+		Copyright © 2013-2018 xx图书馆  BOOKS.com All Rights Reserved. 备案号：陕ICP备15012807号-1
+	</div>
+	
+	<div class="col-2" style="color:#999999;padding:50px 10px 10px 50px;">
+		联系电话：231334325
+	</div>
+</div>
 
 
 

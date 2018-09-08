@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.Console;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,12 +20,18 @@ public class LogController
 	@RequestMapping("/logIn")
 	public Object loginin(User usr,HttpSession session) 
 	{
-		if(MyDao.queryOne("select * from users where user_account = ? and pwd = ?", usr.getUser_account(),usr.getPwd()) != null)
+		
+		List<Map<String,Object> > result = MyDao.queryMapList("select * from users where user_account = ? and pwd = ?", usr.getUser_account(),usr.getPwd());
+		System.out.println(result);
+		if(!result .isEmpty())
 		{
 			//Session--start      loginUserId
 			session.setAttribute("loginUserId", usr.getUser_account());
 			//Session--end
-			return ResultDto.successResult("查询成功");
+			if( result.get(0).get("usr_type").equals("管理员") )
+				return ResultDto.successResult("管理员登录成功");
+			else
+				return ResultDto.successResult("用户登录成功");
 		}
 		else 
 		{

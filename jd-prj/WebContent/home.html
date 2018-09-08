@@ -137,7 +137,7 @@
 </head>
 <body>
 
-<div class="my-title">
+<div id="app" class="my-title">
 
 	xx图书馆
 	
@@ -149,7 +149,7 @@
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		    <a class="dropdown-item" href="#"><i class="fa fa-address-card" aria-hidden="true"></i> 个人信息</a>
 		    <a class="dropdown-item" href="#"><i class="fa fa-key" aria-hidden="true"></i> 修改密码</a>
-		    <a class="dropdown-item" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> 安全退出</a>
+		    <a @click="logout" class="dropdown-item" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> 安全退出</a>
 		  </div>
 	
 	
@@ -197,7 +197,7 @@
 		<!-- 菜单单元结束 -->
 		
 		<!-- 菜单单元开始 -->
-		<div>
+		<div >
 			<div class="my-main-item" data-toggle="collapse" data-target="#my-books" >
 				<i class="fa fa-server"></i> 书籍管理
 			</div>
@@ -242,6 +242,26 @@
 <script src="resources/js/sweetalert.min.js" ></script>
 <script type="text/javascript" src="resources/js/vue.min.js"></script>
 <script type="text/javascript" src="resources/js/my.js"></script>
-
+<script type="text/javascript">
+new Vue({
+	el:'#app',
+	data:{
+		
+	},
+	methods:{
+		logout(){
+			My.operate(
+			{
+				url:'logOut'					
+			},
+			()=>{
+				setTimeout(()=>{
+					window.location.href="login.html";
+				},1000);
+			});
+		}
+	}
+});
+</script>
 </body>
 </html>

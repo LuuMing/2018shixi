@@ -22,9 +22,9 @@
    	height:100%;
    	width:100%;
    	display:flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
    }
    
    .my-center-block{	
@@ -47,6 +47,15 @@
 	    border-left-color:#FFEBCD;
 	    borfer-radius:25px;
 	}
+	
+	.my-logo{
+		position:fixed;
+		left:0px;
+		top:0px;
+		z-index:3;/*块的叠放层级，层级较高的会压在层级较低的上面*/
+	
+		
+	}
    
 
    </style>
@@ -54,6 +63,10 @@
 </head>
 <body>
 <div id="app">
+<!-- logo标志 -->
+	<div class="my-logo">
+		<img src="resources/images/logo.jpg" style="width:100px;"/>
+	</div>
   
 <!-- 登录窗口 -->
     <div class="my-center-block">

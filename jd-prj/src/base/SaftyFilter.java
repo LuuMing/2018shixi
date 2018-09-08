@@ -36,7 +36,8 @@ public class SaftyFilter implements Filter {
 		//放过无需验证的地址
 		if("/login.html".equals(path) || 
 				"/logIn".equals(path) ||
-				path.startsWith("/resources")) {
+				path.startsWith("/resources") || 
+				"/toReg".equals(path)) {
 			
 			chain.doFilter(request, response);//放行通过
 			

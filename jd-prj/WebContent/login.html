@@ -176,7 +176,17 @@
 		
 		regDo() //确认注册--start
 		{
-			console.log("去注册");
+			if  ( this.user.user_account == null|| this.user.pwd == null || this.user.user_name== null ||
+					this.user.sex == null || this.user.user_type== null)
+			{
+				console.log("空");
+				swal({
+					 title: " 请填写完整",											 
+					 icon: "error",
+					 button: "确定"
+				});
+				return;
+			}
 			console.log(this.user);
 			My.ajax({
 			url: 'toReg',

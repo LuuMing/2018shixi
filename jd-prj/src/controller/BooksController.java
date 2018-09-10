@@ -30,11 +30,11 @@ public class BooksController {
 	}
 	
 	
-	@RequestMapping("/goodsList")
+/*	@RequestMapping("/goodsList")
 	public Object getGoodsList(Integer cls_id) {
 		
 		return MyDao.queryMapList("select * from goods where g_id=?", cls_id);
-	}
+	}*/
 	
 	@RequestMapping("/goodsQueryList")
 	public Object getGoodsQueryList(Books gd) {
@@ -96,7 +96,7 @@ public class BooksController {
 		
 	}
 	
-	@RequestMapping("/goodsUpdDo")
+	@RequestMapping("/booksUpdDo")
 	public Object updGoods(Books goods) {
 		
 		try {

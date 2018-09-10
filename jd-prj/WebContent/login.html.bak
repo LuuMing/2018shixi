@@ -14,10 +14,17 @@
    
    body{
    		height:100%;
+<<<<<<< HEAD
+   			width:100%;
+   		
+   }
+=======
+   		
 		background-image:url('resources/images/311908165 (1).jpg');
 		background-size: 100% 100%; 
    }
    
+>>>>>>> e4871c947ab9f66ca3254f8f241c548b579019dd
    #app{
    	height:100%;
    	width:100%;
@@ -77,6 +84,17 @@
 	</div>
 	 </div>
 	
+	<!-- 错误提示 -->
+	<div id="error-win" style="display: none;padding:15px;" >
+		错误
+	</div>
+
+	<!-- 成功提示 -->
+	<div id="success-win" style="display: none;padding:15px;" >
+		注册成功
+	</div>
+	
+	
 	<!-- 注册页面 -->
 	<div id="reg-win" style="display: none;padding:15px;" >
 		<form>
@@ -128,6 +146,9 @@
 		el:'#app',
 		data:{
 			user:{},
+			errorDlg:null,
+			regDlg:null,
+			successDlg:null
 		},
 		
 		methods:{
@@ -136,23 +157,14 @@
 							url:'logIn',
 							data:this.user,
 							handler(result){
-								if(result.success)
-								{
-										console.log("成功");
-										if(result.message == "admin")
-										{
-											window.location.href="./home.html";		
-										}
-										else 
-										{
-											window.location.href="./front-home.html";
-										}	
-								}
+								if(result.success){
+									console.log("成功");
+									window.location.href="./home.html";}
 								else{
-										swal({
-										 title: " 用户名或密码错误",											 
-										 icon: "error",
-										 button: "确定"
+										this.errorDlg = My.open(
+											{
+												title : 'Error',
+												 contentId : 'error-win'
 											});
 								}
 							}
@@ -171,17 +183,7 @@
 		
 		regDo() //确认注册--start
 		{
-			if  ( this.user.user_account == null|| this.user.pwd == null || this.user.user_name== null ||
-					this.user.sex == null || this.user.user_type== null)
-			{
-				console.log("空");
-				swal({
-					 title: " 请填写完整",											 
-					 icon: "error",
-					 button: "确定"
-				});
-				return;
-			}
+			console.log("去注册");
 			console.log(this.user);
 			My.ajax({
 			url: 'toReg',
@@ -190,11 +192,11 @@
 				console.log(result);
 				if(result.success){
 					console.log("成功");
-					swal({
-						 title: "注册成功，请登录",											 
-						 icon: "success",
-						 button: "确定"
-					});
+					this.regDlg = My.open(
+							{
+								title : '注册成功',
+								 contentId : 'success-win'
+							});
 					 setTimeout(
                              ()=>{
                                      window.location.href='login.html';
@@ -202,19 +204,22 @@
                              1500                                     
                      );
 				}else{
-					swal({
-						 title: "注册失败，用户名已被注册",											 
-						 icon: "error",
-						 button: "确定"
-					});
+					console.log("失败");
+						this.errorDlg = My.open(
+							{
+								title : '注册失败',
+								 contentId : 'error-win'
+							});
 					}
 			}
 			});
 		},		//	确认注册--end
 		},
 		
-		mounted()
-		{//挂载完成的回调函数	
+		mounted(){//挂载完成的回调函数
+			
+		
+		console.log("mounted");
 			
 		}
 		

@@ -14,14 +14,21 @@ import dq.base.dto.ResultDto;
 import dq.base.utils.MyUtils;
 import my.dao.MyDao;
 
+@RestController
 public class BooksController {
 
-
-@RestController
-public class GoodsController {
 	
 	@Autowired
 	private ServletContext servletContext;
+	
+	
+	@RequestMapping("/loadBookList")
+	public Object getAllCls() {
+		
+		//查询所有数据
+		return MyDao.queryMapList("select * from books");
+	}
+	
 	
 	@RequestMapping("/goodsList")
 	public Object getGoodsList(Integer cls_id) {
@@ -176,4 +183,4 @@ public class GoodsController {
 		
 	}
 }
-}
+

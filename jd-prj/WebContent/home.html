@@ -162,10 +162,10 @@
 	<div class="my-curr-user dropdown">
 	
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		  <i class="fa fa-user" aria-hidden="true" v-model = "user.user_name"></i> 欢迎您管理员：{{user.user_name}}
+		  <i class="fa fa-user" aria-hidden="true" v-model = "user"></i> 欢迎您管理员：{{user.user_name}}
 		</button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#"><i class="fa fa-address-card" aria-hidden="true"></i> 个人信息</a>
+		    <a class="dropdown-item" href="usr.html" target="contentFrame"><i class="fa fa-address-card" aria-hidden="true"></i> 个人信息</a>
 		    <a class="dropdown-item" href="#"><i class="fa fa-key" aria-hidden="true"></i> 修改密码</a>
 		    <a @click="logout" class="dropdown-item" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> 安全退出</a>
 		  </div>

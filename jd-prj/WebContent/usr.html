@@ -9,72 +9,32 @@
 </head>
 <body>
 
+
 <div id="app" class="container-fluid" style="padding:0 2px 0 2px;" >
-
-
-	<nav>
-	  <ol class="breadcrumb">
-	    <li class="breadcrumb-item">基础信息</li>
-	  </ol>
-	</nav>
-	
-	
-	<div class="btn-group" style="margin-bottom:10px;" >
-	  <button @click="clsAddTo"  type="button" class="btn btn-primary">新增</button>
-	  <button type="button" class="btn btn-danger">删除</button>
-	  
-	</div>
-	
-
-	<table class="table">
-	 
-	 	<thead>
-	 		<tr>
-	 			<th>分类编号</th>
-	 			<th>分类名称</th>
-	 			<th>分类说明</th>
-	 		</tr>
-	 	
-	 	</thead>
-	 	
-	 	<tbody>
-	 	
-	 		<tr v-for=" usr in usrList">
-	 			<td>{{ usr.id}}</td>
-	 			<td>{{ usr.nickname}}</td>
-	 			<td>{{ usr.truename}}</td>
-	 		</tr>
-	 		
-	 		
-	 	</tbody>
-	
-	</table>
-	
-	
-	
-	<!-- 增加窗口的内容 -->
-	<div id="cls-win-add" style="display: none;padding:15px;" >
-		<form>
-		  <div class="form-group">
-		    <label for="cls-add-name">分类名称</label>
-		    <input v-model="usr.nickname" type="text" class="form-control" id="cls-add-name" placeholder="请输入分类名称">		   
-		  </div>
-		  <div class="form-group">
-		    <label for="cls-add-remark">分类说明</label>
-		    <input v-model="usr.id" type="text" class="form-control" id="cls-add-remark" placeholder="请输入分类名称">		   
-		  </div>
-		  <button @click="clsAddDo" type="button" class="btn btn-primary">提交</button>
-		</form>
-	
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
+	<div class="container" v-model = "user">
+  	<div class="row">
+    	<div class="col">帐号</div>
+    	<div class="col">{{user.user_account}}</div>
+    <div class="w-100"></div>
+    	<div class="col">姓名</div>
+    	<div class="col">{{user.user_name}}</div>
+     <div class="w-100"></div>
+    	<div class="col">性别</div>
+    	<div class="col">{{user.sex}}</div>
+    <div class="w-100"></div>
+    	<div class="col">用户类型</div>
+    	<div class="col">{{user.usr_type}}</div>
+    <div class="w-100"></div>
+    	<div class="col">注册时间</div>
+    	<div class="col">{{user.begDat}}</div>
+    <div class="w-100"></div>
+    	<div class="col">到期时间</div>
+    	<div class="col">{{user.endDat}}</div>
+    <div class="w-100"></div>
+    	<div class="col">最大借阅量</div>
+    	<div class="col">{{user.cnt}}</div>
+  </div>
+</div>
 </div>
 
 
@@ -91,70 +51,24 @@
 	new Vue({
 		el:'#app',
 		data:{
-			usrList:[],
-			usr:{}
+			user:{}
 		},
-		
-		methods:{
-			
-			clsAddTo(){
+		methods:
+		{
 				
-				this.dlg=My.open({
-					title:'新增商品分类',
-					contentId:'cls-win-add'					
-					
-				});
-				
-			},
-			
-			clsAddDo(){
-				console.log("=====>");
-				
-				My.operate(
-						{
-							title:'您确实要提交该数据吗？',
-							text:'如果。。。。，则。。。。。！',
-							url:'clsAddDo',
-							data:this.usr
-						},
-						
-						() => {
-							My.loadData(
-									{
-										url:'usrList'
-									},
-									
-									(data) => { //处理服务器数据的回调函数
-										this.usrList=data;
-									}
-							);
-							My.close(this.dlg);
-						}
-				
-				);
-			}
-			
-			
-		},
-		
+		},		
 		mounted(){//挂载完成的回调函数
-			
-			//从服务端获取数据
 			My.loadData(
 					{
-						url:'usrList'
+						url:'getInfo'
 					},
-					
 					(data) => { //处理服务器数据的回调函数
-						this.usrList=data;
-					}
-			);
-			
+						this.user=data;
+					});
+		console.log("mounted");
+		console.log(this.user);
 		}
-		
-		
 	});
-
 </script>
 
 

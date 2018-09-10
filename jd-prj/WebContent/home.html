@@ -6,28 +6,45 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css" >
 <link rel="stylesheet" href="resources/css/font-awesome.min.css" >
-</head>
-<body>
+
 <style type="text/css">
 
-	.my-title{	
+	.my-title-left{	
 		position:fixed;
 		left:0px;
 		top:0px;
-		z-index:10;/*块的叠放层级，层级较高的会压在层级较低的上面*/
+		z-index:5;/*块的叠放层级，层级较高的会压在层级较低的上面*/
 	
 		width:100%;
 		height:100px;
-		background-color: #A0522D;	
 		
-		color:#CCCCCC; /*块內文字颜色*/
+		
 		font-size:24px;
 		font-weight:bold;/*文字加粗*/
 		font-family: 楷体;
 		line-height:100px;/*行高，文字在行高范围内自动居中*/
-		padding-left:30px;/*左侧内边距*/
+		
+
+		
+		background-image: url(resources/images/admin/left.jpg), url(resources/images/admin/right.jpg);
+	    background-position: left,right;
+	    background-repeat: no-repeat,no-repeat;
+	    background-size:365px 100px,350px 100px;
 	}
 	
+	.my-title-right{	
+		position:fixed;
+		right:350px;
+		left:365px;
+		top:0px;
+		height:100px;
+		z-index:6;/*块的叠放层级，层级较高的会压在层级较低的上面*/
+		
+		background-image:url('resources/images/admin/123657567.jpg');
+		background-size: 100% 100%; 
+				
+		}
+		
 	.my-nav{	
 		position:fixed;
 		left:0px;
@@ -60,7 +77,7 @@
 		bottom:0px;
 		
 		width:100%;
-		height:50px;
+		height:80px;
 		background-color: #112233;	
 	}
 	
@@ -137,29 +154,30 @@
 </head>
 <body>
 
-<div id="app" class="my-title">
-
-	xx图书馆
-	
+<div id="app" class="my-title-left">
+		<div style="padding-left:150px;/*左侧内边距*/">
+		<img src="resources/images/logo.jpg" style="width:40px;padding-bottom:15px;"/> 
+		旅人书馆
+		</div>
 	<div class="my-curr-user dropdown">
 	
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		  <i class="fa fa-user" aria-hidden="true"></i>  欢迎您的登录，管理员：xxx
+		  <i class="fa fa-user" aria-hidden="true" v-model = "user.user_name"></i> 欢迎您管理员：{{user.user_name}}
 		</button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		    <a class="dropdown-item" href="#"><i class="fa fa-address-card" aria-hidden="true"></i> 个人信息</a>
 		    <a class="dropdown-item" href="#"><i class="fa fa-key" aria-hidden="true"></i> 修改密码</a>
 		    <a @click="logout" class="dropdown-item" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> 安全退出</a>
 		  </div>
-	
-	
-	
-		
-	
 	</div>
+</div>
 
+
+<div class="my-title-right">
 
 </div>
+
+
 <div class="my-nav"  >
 
 
@@ -212,27 +230,21 @@
 		
 		
 	</div>
-
+</div>
 
 </div>
+
 <div class="my-content"  ><iframe name="contentFrame"></iframe></div>
-<div class="my-copyright row align-items-center px-5" style="height:80px;"  >
-	<div class="col-2">
-		
-	</div>
+<div class="my-copyright px-5"  style="display: flex; flex-direction:column; align-items: center; justify-content: center;"   >
 	
-	<div class="col-8" style="color:#999999;text-align:center;">
+	<div class="" style="color:#999999;">
 		Copyright © 2013-2018 xx图书馆  BOOKS.com All Rights Reserved. 备案号：陕ICP备15012807号-1
 	</div>
 	
-	<div class="col-2" style="color:#999999;padding:50px 10px 10px 50px;">
+	<div class="" style="color:#999999; align-self: flex-end; ">
 		联系电话：231334325
 	</div>
 </div>
-
-
-
-
 
 <script src="resources/js/jquery.min.js" ></script>
 <script src="resources/js/bootstrap.bundle.min.js"></script>

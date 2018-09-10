@@ -20,10 +20,6 @@ public class RegController
 			return ResultDto.failResult("账户已注册");
 		else
 		{
-			if( !usr.valid() )
-			{
-				return ResultDto.failResult("请填写完整");
-			}
 			int maxCap = 0;
 			Date current =  new java.sql.Date(new java.util.Date().getTime());
 	        Calendar calendar = Calendar.getInstance();

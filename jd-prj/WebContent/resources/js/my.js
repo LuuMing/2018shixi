@@ -57,6 +57,26 @@ My.loadData=function(opts,handler){
 };
 
 /**
+ * 带有上传文件的操作
+ * 参数说明
+ * 	参数opts json格式的参数，具体说明如下：
+ * 		{
+ * 			title : '提示信息标题',
+ * 			text : '提示信息文字',
+ * 			url : '请求地址',
+ * 			data : '请求参数'
+ * 		
+ * 		}
+ * 	参数 okHander 请求成功后执行的函数
+ */
+My.operateMultipartData = function(opts,okHandler){
+	opts.contentType=false
+	opts.processData=false;
+	
+	this.operate(opts,okHandler);
+}
+
+/**
  * 参数说明
  * 	参数opts json格式的参数，具体说明如下：
  * 		{
@@ -100,6 +120,13 @@ My.operate=function(opts,okHandler){
 
 My.ajaxWithConfirm=function(options){
 	
+	
+	if((!options.title) && (!options.text)){
+		this.ajax(options);
+		return;
+	}
+	
+	
 	var warnTitle = options.title?options.title:'';
 	var warnText = options.text?options.text:'';
 	
@@ -138,17 +165,28 @@ My.ajax=function(options){
 	var method = options.method?options.method:'POST';
 	var data = options.data?options.data:undefined;
 	var type = options.dataType?options.dataType:'JSON';
-	var contentType = options.contentType?options.contentType:undefined;
+	var contentType = options.contentType===false ? false : ( options.contentType?options.contentType:'application/x-www-form-urlencoded');
+	var processData = options.processData===false ? false : (options.processData?options.processData:true);
 	
 	var myhandler = options.handler && typeof(options.handler)==='function' ? options.handler : undefined;
 	
 	var index = layer.load();
-	try{		
+	try{
+		console.log({
+			url:url,
+			data:data,
+			method:method,
+			dataType:type,
+			contentType:contentType,
+			processData:processData
+		});
 		$.ajax({
 			url:url,
 			data:data,
 			method:method,
-			dataType:type
+			dataType:type,
+			contentType:contentType,
+			processData:processData
 		}).done((data) => {
 			layer.close(index);
 			try{

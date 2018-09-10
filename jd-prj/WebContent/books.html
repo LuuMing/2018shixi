@@ -46,9 +46,9 @@
 	 			<td class="align-middle">{{book.id}}</td>
 	 			<td class="align-middle">{{book.name}}</td>
 	 			<td class="align-middle">{{book.author}}</td>
-	 			<td class="align-middle"><img :src="'resources/images/'+book.books_images" style="width:50px;" /></td>
+	 			<td class="align-middle"><img :src="'images/books?filename='+book.books_images" style="width:50px;" /></td>
 	 			<td class="align-middle">
-	 				<a href="#"  >修改</a>
+	 				<a href="#"  @click="booksUpdTo(book)" >修改</a>
 	 				<a href="#"  >删除</a>
 	 			</td>
 	 		</tr>
@@ -60,11 +60,34 @@
 	
 	
 	
+	<!-- 修改窗口的内容 -->
+	<div id="books-win-upd" style="display: none; padding:15px">
+	  <form ref="updform">
+	   	   <div class="form-group" id="cls-add-book">
+		    <label>书目名称</label>
+		    <input v-model="bks.id" name="id" type="text" class="form-control"  placeholder="请输入书目名称">		   
+		  </div>
+		  <div class="form-group" id="cls-add-book">
+		    <label>书目名称</label>
+		    <input v-model="bks.name" name="name" type="text" class="form-control"  placeholder="请输入书目名称">		   
+		  </div>
+		  <div class="form-group">
+		    <label>作者名称</label>
+		    <input v-model="bks.author" name="author" type="text" class="form-control" placeholder="请输入作者名称">		   
+		  </div>
+		  <div class="form-group">
+		    <label>商品图片</label>
+		    <img :src="'resources/images/books/'+books.books_images" style="width:50px;"/>
+		    <input  name="books_images" type="file" class="form-control-file">		   
+		  </div>
+		  <button @click="booksUpdDo" type="button" class="btn btn-primary">提交</button>
+		</form>
 	
 	
+	</div>
+	
+
 </div>
-
-
 
 <!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
 <script src="resources/js/jquery.min.js" ></script>
@@ -85,7 +108,12 @@ new Vue({
 		
 		books:[],
 		
-		ids:[]
+		ids:[],
+		
+		dlg:null,
+		
+		bks:{},
+		
 		
 	},
 	
@@ -96,7 +124,8 @@ new Vue({
 	
 		
 		
-		loadBookList(){
+		loadBookList()
+		{
 			My.loadData(
 					{
 						url:'loadBookList'
@@ -108,7 +137,55 @@ new Vue({
 			);
 		},//加载分类信息-end
 		
+		
+		//弹出修改窗体-start
+		booksUpdTo(bks){
+			this.bks=bks;
+			this.dlg=My.open({
+					title:'修改商品信息',
+					contentId:'books-win-upd'
+					
+					
+				});
+		},
+		//弹出修改窗体-end
+		booksUpdDo()
+		{
+			var param = new FormData(this.$refs.updform);
+			 
+			My.operateMultipartData(
+			{
+				title:'你确定要提交该数据',
+				text:'想好了就干',
+				url:'booksUpdDo',
+				data:param
+			},
+			()=>{
+				My.loadData(
+						{
+							url:'loadBookList'
+						},
+						
+						(data) => { //处理服务器数据的回调函数
+							this.books=data;
+						}
+				);
+				My.close(this.dlg);
+			}
+			
+			);
+		},
+	
+	
+	
+	
+	
 	},
+		
+		
+		
+		
+	
 	mounted(){
 		this.loadBookList();
 	}

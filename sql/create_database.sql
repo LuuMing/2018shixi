@@ -16,7 +16,7 @@ create table users (
 	primary key(id)
 );
 
-insert into users(user_account,user_name,sex,pwd,usr_type) values ("151004113","卢明","男","151004113","管理员");
+insert into users(user_account,user_name,sex,pwd,usr_type) values ("151004113","卢明","男","151004113","admin");
 
 
 create table books

@@ -28,7 +28,7 @@ public class LogController
 			//Session--start      loginUserId
 			session.setAttribute("loginUserId", usr.getUser_account());
 			//Session--end
-			if( result.get(0).get("usr_type").equals("π‹¿Ì‘±") )
+			if( result.get(0).get("usr_type").equals("admin") )
 				return ResultDto.successResult("admin");
 			else
 				return ResultDto.successResult("user");

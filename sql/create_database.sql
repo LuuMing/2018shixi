@@ -24,8 +24,12 @@ create table books
 	id int auto_increment,
 	name varchar(20) not null, 
 	author varchar(50) not null,
+	books_images varchar(100),
+
 	primary key(id)
 );
+
+insert into books(name,author,books_images) values ("考研数学","张宇","jd0001.jpg");
 create table book_type
 (
 	id int auto_increment,
@@ -33,7 +37,7 @@ create table book_type
 	primary key(id)
 );
 insert into book_type(id,type_name) values(01,"考研类");
-insert into books(name,author) values ("考研数学","张宇");
+
 
 
 create table lend

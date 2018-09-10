@@ -16,7 +16,9 @@ create table users (
 	primary key(id)
 );
 
-insert into users(user_account,user_name,sex,pwd,usr_type) values ("151004113","LuMing","男","151004113","admin");
+insert into users(user_account,user_name,sex,pwd,usr_type) values ("1","LuMing","男","1","admin");
+insert into users(user_account,user_name,sex,pwd,usr_type) values ("user","LuMing","男","1","user");
+
 
 
 create table books
@@ -29,7 +31,7 @@ create table books
 	primary key(id)
 );
 
-insert into books(name,author,books_images) values ("考研数学","张宇","jd0001.jpg");
+insert into books(name,author,books_images) values ("12334","789","jd0001.jpg");
 create table book_type
 (
 	id int auto_increment,

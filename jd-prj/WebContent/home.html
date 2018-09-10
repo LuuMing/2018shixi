@@ -171,8 +171,8 @@
 
 </head>
 <body>
-
-<div id="app" class="my-title-left">
+<div id="app">  <!-- Vue--start -->
+<div  class="my-title-left">
 		<div style="padding-left:150px;/*左侧内边距*/">
 		<img src="resources/images/logo.jpg" style="width:40px;padding-bottom:15px;"/> 
 		旅人书馆
@@ -184,8 +184,8 @@
 		</button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		    <a class="dropdown-item" href="usr.html" target="contentFrame"><i class="fa fa-address-card" aria-hidden="true"></i> 个人信息</a>
-		    <a class="dropdown-item" href="#"><i class="fa fa-key" aria-hidden="true"></i> 修改密码</a>
-		    <a @click="logout" class="dropdown-item" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> 安全退出</a>
+		    <a class="dropdown-item" @click="pwdUpdTo"><i class="fa fa-key" aria-hidden="true"></i> 修改密码</a>
+		    <a @click="logout" class="dropdown-item" ><i class="fa fa-power-off" aria-hidden="true"></i> 安全退出</a>
 		  </div>
 	</div>
 </div>
@@ -251,7 +251,6 @@
 	</div>
 </div>
 
-</div>
 
 <div class="my-content"  ><iframe name="contentFrame"></iframe></div>
 
@@ -266,6 +265,23 @@
 	</div>
 </div>
 
+<!-- 修改密码 --start-->
+<div id="pwd-upd" style="display: none;padding:15px;" >
+		<form>
+		  <div class="form-group">
+		    <label>请输入新密码</label>
+		    <input v-model="updPwd" type="text" class="form-control" id="pwd-upd-1"  placeholder="5-8">		   
+		  </div>
+		  <div class="form-group">
+		    <label v-for ="pwd-upd-2" >请再输入一次</label>
+		    <input v-model="updPwd2" type="text" class="form-control"  placeholder="请保持两次输入一致">		   
+		  </div>
+		  <button @click="pwdUpdDo" type="button" class="btn btn-primary">提交</button>
+		</form>	
+</div>
+<!-- 修改密码 --end-->
+</div>   <!-- Vue--end -->
+
 <script src="resources/js/jquery.min.js" ></script>
 <script src="resources/js/bootstrap.bundle.min.js"></script>
 <script src="resources/layer/layer.js" ></script>
@@ -277,6 +293,8 @@ new Vue({
 	el:'#app',
 	data:{
 		user:{},	
+		updPwd:{},
+		updPwd2:{}
 	},
 	methods:{
 		logout(){
@@ -291,7 +309,47 @@ new Vue({
 					window.location.href="login.html";
 				},1000);
 			});
-		}
+		},
+		
+		pwdUpdTo()    //修改密码To--start
+		{  
+			this.updPwd="";
+			this.updPwd2="";
+			this.dlg=My.open({
+				title:'修改密码',
+				contentId:'pwd-upd'
+			});	
+		},                      //修改密码To--end
+		
+		pwdUpdDo()    //修改密码Do--start
+		{  
+			console.log("xiugai");
+			var message ="";
+			var valid = true;
+			if(this.updPwd == "" || this.updPwd2 == "")
+			{
+				message = "请填写完整";
+				valid = false;
+			}
+			 if(valid && this.updPwd != this.updPwd2)
+			{
+				message = "两次输入不一致";
+				valid = false;
+			}
+			if(!valid)
+			{
+				swal({
+					 title: message,											 
+					 icon: "error",
+					 button: "确定"
+						});	
+			}
+			else
+			{
+				
+			}
+		}                      //修改密码Do--end
+
 	},
 	mounted()
 	{//挂载完成的回调函数	

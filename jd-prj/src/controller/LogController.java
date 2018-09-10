@@ -29,9 +29,9 @@ public class LogController
 			session.setAttribute("loginUserId", usr.getUser_account());
 			//Session--end
 			if( result.get(0).get("usr_type").equals("管理员") )
-				return ResultDto.successResult("管理员登录成功");
+				return ResultDto.successResult("admin");
 			else
-				return ResultDto.successResult("用户登录成功");
+				return ResultDto.successResult("user");
 		}
 		else 
 		{
@@ -43,6 +43,11 @@ public class LogController
 	{
 		session.removeAttribute("loginUserId");
 		return ResultDto.successResult("注销成功");
+	}
+	@RequestMapping("/getInfo")
+	public Object getinfo(HttpSession session)
+	{
+		return  MyDao.queryOneJson( "select * from users where user_account = ?", session.getAttribute("loginUserId"));
 	}
 }
 

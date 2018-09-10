@@ -346,10 +346,20 @@ new Vue({
 			}
 			else
 			{
-				
+				My.ajax
+				({
+							url:'pwdUpd',
+						   data:this.updPwd,
+							handler(result)
+							{
+								setTimeout
+								(
+										()=>{ 	window.location.href="home.html";  },1000	
+								);	
+							}
+				});
 			}
 		}                      //修改密码Do--end
-
 	},
 	mounted()
 	{//挂载完成的回调函数	

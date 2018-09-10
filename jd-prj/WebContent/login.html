@@ -128,9 +128,6 @@
 		el:'#app',
 		data:{
 			user:{},
-			errorDlg:null,
-			regDlg:null,
-			successDlg:null
 		},
 		
 		methods:{
@@ -149,8 +146,7 @@
 										else 
 										{
 											window.location.href="./front-home.html";
-										}
-										
+										}	
 								}
 								else{
 										swal({
@@ -217,10 +213,8 @@
 		},		//	确认注册--end
 		},
 		
-		mounted(){//挂载完成的回调函数
-			
-		
-		console.log("mounted");
+		mounted()
+		{//挂载完成的回调函数	
 			
 		}
 		

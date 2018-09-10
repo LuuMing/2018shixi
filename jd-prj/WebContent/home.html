@@ -214,8 +214,6 @@
 	</div>
 
 
-
-
 </div>
 <div class="my-content"  ><iframe name="contentFrame"></iframe></div>
 <div class="my-copyright row align-items-center px-5" style="height:80px;"  >
@@ -246,13 +244,15 @@
 new Vue({
 	el:'#app',
 	data:{
-		
+		user:{},	
 	},
 	methods:{
 		logout(){
+			console.log(this.user);
 			My.operate(
 			{
-				url:'logOut'					
+				url:'logOut',
+				title:'确定退出？',
 			},
 			()=>{
 				setTimeout(()=>{
@@ -260,6 +260,18 @@ new Vue({
 				},1000);
 			});
 		}
+	},
+	mounted()
+	{//挂载完成的回调函数	
+		console.log("mounted");
+		//从服务端获取数据
+		My.loadData(
+				{
+					url:'getInfo'
+				},
+				(data) => { //处理服务器数据的回调函数
+					this.user=data;
+				});
 	}
 });
 </script>

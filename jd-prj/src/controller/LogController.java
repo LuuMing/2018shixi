@@ -44,5 +44,10 @@ public class LogController
 		session.removeAttribute("loginUserId");
 		return ResultDto.successResult("×¢Ïú³É¹¦");
 	}
+	@RequestMapping("/getInfo")
+	public Object getinfo(HttpSession session)
+	{
+		return  MyDao.queryOneJson( "select * from users where user_account = ?", session.getAttribute("loginUserId"));
+	}
 }
 

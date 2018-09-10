@@ -13,7 +13,7 @@
 		position:fixed;
 		left:0px;
 		top:0px;
-		z-index:5;/*块的叠放层级，层级较高的会压在层级较低的上面*/
+		z-index:7;/*块的叠放层级，层级较高的会压在层级较低的上面*/
 	
 		width:100%;
 		height:100px;
@@ -38,22 +38,37 @@
 		left:365px;
 		top:0px;
 		height:100px;
-		z-index:6;/*块的叠放层级，层级较高的会压在层级较低的上面*/
+		z-index:8;/*块的叠放层级，层级较高的会压在层级较低的上面*/
 		
 		background-image:url('resources/images/admin/123657567.jpg');
 		background-size: 100% 100%; 
 				
 		}
 		
-	.my-nav{	
+	.my-nav-1{	
+		border-radius: 15px 50px 30px;
 		position:fixed;
 		left:0px;
 		top:100px;
-		bottom:50px;
+		bottom:80px;
 	
 		width:175px;
-		
+		z-index:4;
 		background-color: #2F4F4F;	
+		background-image:url('resources/images/admin/121431501.jpg');
+		background-size: 100% 100%;
+	}
+	.my-nav-2{	
+		
+		position:fixed;
+		left:0px;
+		top:100px;
+		bottom:80px;
+	
+		width:175px;
+		z-index:3;
+		background-image:url('resources/images/admin/143980199.jpg');
+		background-size: 100% 100%;
 	}
 	
 	.my-content{	
@@ -61,9 +76,12 @@
 		left:175px;
 		right:0px;
 		top:100px;
-		bottom:30px;
+		bottom:80px;
 		background-color: #FFFFFF;	
+		background-image:url('resources/images/admin/165394258.jpg');
+		background-size: 100% 100%;
 	}
+
 	
 	.my-content iframe{
 		width:100%;
@@ -176,9 +194,10 @@
 <div class="my-title-right">
 
 </div>
+<div class="my-nav-2">
+</div>
 
-
-<div class="my-nav"  >
+<div class="my-nav-1"  >
 
 
 	<div class="accordion" id="my-menu" style="color:white;">
@@ -235,6 +254,7 @@
 </div>
 
 <div class="my-content"  ><iframe name="contentFrame"></iframe></div>
+
 <div class="my-copyright px-5"  style="display: flex; flex-direction:column; align-items: center; justify-content: center;"   >
 	
 	<div class="" style="color:#999999;">

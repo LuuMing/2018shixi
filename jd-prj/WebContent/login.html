@@ -77,17 +77,6 @@
 	</div>
 	 </div>
 	
-	<!-- 错误提示 -->
-	<div id="error-win" style="display: none;padding:15px;" >
-		错误
-	</div>
-
-	<!-- 成功提示 -->
-	<div id="success-win" style="display: none;padding:15px;" >
-		注册成功
-	</div>
-	
-	
 	<!-- 注册页面 -->
 	<div id="reg-win" style="display: none;padding:15px;" >
 		<form>
@@ -205,11 +194,11 @@
 				console.log(result);
 				if(result.success){
 					console.log("成功");
-					this.regDlg = My.open(
-							{
-								title : '注册成功',
-								 contentId : 'success-win'
-							});
+					swal({
+						 title: "注册成功，请登录",											 
+						 icon: "success",
+						 button: "确定"
+					});
 					 setTimeout(
                              ()=>{
                                      window.location.href='login.html';
@@ -217,12 +206,11 @@
                              1500                                     
                      );
 				}else{
-					console.log("失败");
-						this.errorDlg = My.open(
-							{
-								title : result.message,
-								 contentId : 'error-win'
-							});
+					swal({
+						 title: "注册失败，用户名已被注册",											 
+						 icon: "error",
+						 button: "确定"
+					});
 					}
 			}
 			});

@@ -45,20 +45,20 @@ insert into book_type(id,type_name) values(01,"考研类");
 create table lend
 (
          id int auto_increment,
-         user_id int not null	,
-         book_id int not null,
+	 user_id int not null,
+	 book_id int not null,
          ldDat date,
          endDat date,
 	 bakDat date,
 	 expired bool,
          log varchar(100),
          primary key(id),
-	 foreign key (user_id) references users(id),	
-	 foreign key (book_id) references books(id)
+	 foreign key fk_usr(user_id) references users(id),	
+	 foreign key fk_bok(book_id) references books(id)
 );
 
 
-insert into lend(user_id,book_id,ldDat,endDat) values(151004113,01,"2018-9-6","2018-9-10");
+insert into lend(user_id,book_id,ldDat,endDat) values(1,01,"2018-9-6","2018-9-10");
 
 select * from lend;
 

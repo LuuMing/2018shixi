@@ -73,7 +73,7 @@ public class BooksController {
 		return MyDao.queryMapList(sql,list.toArray());
 	}
 	
-	@RequestMapping("/goodsAddDo")
+	@RequestMapping("/booksAddDo")
 	public Object addGoods(Books goods) {
 		
 		try {
@@ -181,12 +181,12 @@ public class BooksController {
 		
 	
 	
-	@RequestMapping("/goodsDelDo")
-	public Object delGoods(Integer g_id) {
+	@RequestMapping("/booksDelDo")
+	public Object delGoods(Integer id) {
 		
 		MyDao.update(
 				"delete from books where id = ?", 
-				g_id);
+				id);
 		
 		
 		return ResultDto.successResult("删除商品信息成功！");

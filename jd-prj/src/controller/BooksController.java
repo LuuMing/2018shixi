@@ -31,7 +31,7 @@ public class BooksController {
 	@RequestMapping("/loadBookList")
 	public Object getAllCls() {
 		
-		//²éÑ¯ËùÓÐÊý¾Ý
+		//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		return MyDao.queryMapList("select * from books");
 	}
 	
@@ -77,16 +77,16 @@ public class BooksController {
 	public Object addGoods(Books goods) {
 		
 		try {
-			//»ñÈ¡ÎÄ¼þµÄÔ­Ê¼Ãû³Æ
+			//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½ï¿½
 			String fileName = goods.getBooks_images().getOriginalFilename();
 			System.out.println("filename:"+fileName);
-			//ÏîÄ¿ÖÐÎÄ¼þµÄ´æ·ÅµÄÂ·¾¶
+			//ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ä´ï¿½Åµï¿½Â·ï¿½ï¿½
 			String path = "/resources/images/" + fileName;
-			//»ñÈ¡ÎÄ¼þÕæÊµÂ·¾¶
+			//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ÊµÂ·ï¿½ï¿½
 			String realpath = servletContext.getRealPath(path);
-			//»ñÈ¡ÎÄ¼þÊý¾Ý£¨×Ö½ÚÊý×é£©
+			//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½é£©
 			byte[] bytes = goods.getBooks_images().getBytes();
-			//´æ·ÅÎÄ¼þ
+			//ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 			MyUtils.save(realpath, bytes);
 			
 			MyDao.update(
@@ -94,10 +94,10 @@ public class BooksController {
 							+ "values(?       ,?    ,?    )",
 					goods.getName(), goods.getAuthor(), fileName);
 			
-			return ResultDto.successResult("ÐÂÔöÉÌÆ·ÐÅÏ¢³É¹¦£¡");
+			return ResultDto.successResult("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½É¹ï¿½ï¿½ï¿½");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResultDto.failResult("ÐÂÔöÉÌÆ·ÐÅÏ¢Ê§°Ü£¡");
+			return ResultDto.failResult("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢Ê§ï¿½Ü£ï¿½");
 		}
 		
 	}
@@ -109,7 +109,7 @@ public class BooksController {
 		
 		OutputStream out =response.getOutputStream();
 		
-		InputStream in = new FileInputStream("E:/imgs/books/"+filename);
+		InputStream in = new FileInputStream("E:/imgs/books/"+filename); //linux "/home/luming/imgs/books/"
 		
 		byte[] b=new byte[1024*1024];
 		int len = -1;
@@ -135,18 +135,18 @@ public class BooksController {
 		
 		try {
 			if(book.getBooks_images()!=null && book.getBooks_images().getSize()>0) {
-				//»ñÈ¡ÎÄ¼þµÄÔ­Ê¼Ãû³Æ
+				//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½ï¿½
 				String fileName = book.getBooks_images().getOriginalFilename();
 				fileName = getNewNum()+fileName.substring(fileName.lastIndexOf("."));
 				System.out.println("filename:"+fileName);
-				//ÏîÄ¿ÖÐÎÄ¼þµÄ´æ·ÅµÄÂ·¾¶
+				//ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ä´ï¿½Åµï¿½Â·ï¿½ï¿½
 				//String path = "/resources/images/books/" + fileName;
-				//»ñÈ¡ÎÄ¼þÕæÊµÂ·¾¶
+				//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ÊµÂ·ï¿½ï¿½
 				//String realpath = servletContext.getRealPath(path);
-				String realpath = "E:/imgs/books/"+fileName;
-				//»ñÈ¡ÎÄ¼þÊý¾Ý£¨×Ö½ÚÊý×é£©
+				String realpath = "E:/imgs/books/"+fileName;   //linux "/home/luming/imgs/books/"
+				//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½é£©
 				byte[] bytes = book.getBooks_images().getBytes();
-				//´æ·ÅÎÄ¼þ
+				//ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 				MyUtils.save(realpath, bytes);
 				
 				MyDao.update(
@@ -169,10 +169,10 @@ public class BooksController {
 			}
 			
 			
-			return ResultDto.successResult("ÐÞ¸ÄÉÌÆ·ÐÅÏ¢³É¹¦£¡");
+			return ResultDto.successResult("ï¿½Þ¸ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½É¹ï¿½ï¿½ï¿½");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResultDto.failResult("ÐÞ¸ÄÉÌÆ·ÐÅÏ¢Ê§°Ü£¡");
+			return ResultDto.failResult("ï¿½Þ¸ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢Ê§ï¿½Ü£ï¿½");
 		}		
 		
 }		
@@ -189,7 +189,7 @@ public class BooksController {
 				id);
 		
 		
-		return ResultDto.successResult("É¾³ýÉÌÆ·ÐÅÏ¢³É¹¦£¡");
+		return ResultDto.successResult("É¾ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½É¹ï¿½ï¿½ï¿½");
 		
 	}
 	
@@ -198,7 +198,7 @@ public class BooksController {
 		
 		
 		if(g_ids==null || g_ids.length==0) {
-			return ResultDto.failResult("ÄúÃ»Ñ¡ÔñÈÎºÎÊý¾Ý£¡");
+			return ResultDto.failResult("ï¿½ï¿½Ã»Ñ¡ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½Ý£ï¿½");
 		}
 		
 		int i;
@@ -210,7 +210,7 @@ public class BooksController {
 		
 		
 		
-		return ResultDto.successResult("É¾³ýÉÌÆ·ÐÅÏ¢³É¹¦£¡");
+		return ResultDto.successResult("É¾ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½É¹ï¿½ï¿½ï¿½");
 		
 	}
 }

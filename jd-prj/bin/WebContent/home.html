@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" >
+<link rel="stylesheet" href="resources/css/font-awesome.min.css" >
+
+<style type="text/css">
+
+	.my-title-left{	
+		position:fixed;
+		left:0px;
+		top:0px;
+		z-index:10;/*块的叠放层级，层级较高的会压在层级较低的上面*/
+	
+		width:100%;
+		height:100px;
+		background-color: #A0522D;	
+		
+		
+		font-size:24px;
+		font-weight:bold;/*文字加粗*/
+		font-family: 楷体;
+		line-height:100px;/*行高，文字在行高范围内自动居中*/
+		padding-left:30px;/*左侧内边距*/
+		
+		background-image: url(resources/images/admin/left.jpg), url(resources/images/admin/right.jpg);
+	    background-position: left,right;
+	    background-repeat: no-repeat,no-repeat;
+	    background-size:361px 100px,300px 100px;
+	}
+	
+		
+	.my-nav{	
+		position:fixed;
+		left:0px;
+		top:100px;
+		bottom:50px;
+	
+		width:175px;
+		
+		background-color: #2F4F4F;	
+	}
+	
+	.my-content{	
+		position:fixed;
+		left:175px;
+		right:0px;
+		top:100px;
+		bottom:30px;
+		background-color: #FFFFFF;	
+	}
+	
+	.my-content iframe{
+		width:100%;
+		height:100%;
+		border:none;
+	}
+	
+	.my-copyright{	
+		position:fixed;
+		left:0px;		
+		bottom:0px;
+		
+		width:100%;
+		height:80px;
+		background-color: #112233;	
+	}
+	
+	.my-curr-user{
+	
+		position:absolute;/*相对于父元素的定位*/
+		right:10px;		
+		bottom:8px;
+		
+		font-family:楷体;
+		font-size:14px;
+		line-height: 20px;
+	
+	}
+	
+	.my-main-item{
+	
+		color:#AAAAAA;
+	
+		height:50px;
+		line-height:50px;
+		/* text-align:center; *//*文字水平居中*/
+		
+		padding-left:20px;
+		
+		border-bottom:2px solid #505050;
+		cursor: pointer;/*光标手型*/
+		
+		
+		
+	
+	}
+	
+	.my-main-item:hover{
+		color:white;
+	}
+	
+	
+	
+	.my-sub-item{
+		
+		display:block;/*设置为块级*/
+		
+		
+		/*text-align:center;*//*文字水平居中*/
+		
+		color:white;
+		
+		margin:5px 15px 5px 15px;  /*外边距 上右下左*/
+		border-radius: 10px;
+		padding:5px 0 5px 0;
+		
+		font-size:14px;
+	
+	}
+	
+	
+
+
+	.my-sub-item:link,.my-sub-item:visited{
+		text-decoration: none;/*去掉下划线*/
+	}
+	
+	.my-sub-item:hover{
+		text-align:center;
+		font-weight: bold;
+		background-color: #00BBEE;
+		color:white;
+	}
+
+</style>
+
+
+</head>
+<body>
+
+<<<<<<< HEAD
+<div class="my-title-left">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="resources/images/logo.jpg" style="width:40px;padding-bottom:15px;"/> 
+		旅人书馆
+=======
+<div id="app" class="my-title">
+
+	xx图书馆
+	
+	<div class="my-curr-user dropdown">
+	
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <i class="fa fa-user" aria-hidden="true" v-model = "user.user_name"></i>  欢迎您的登录，管理员：{{user.user_name}}
+		</button>
+		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		    <a class="dropdown-item" href="#"><i class="fa fa-address-card" aria-hidden="true"></i> 个人信息</a>
+		    <a class="dropdown-item" href="#"><i class="fa fa-key" aria-hidden="true"></i> 修改密码</a>
+		    <a @click="logout" class="dropdown-item" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> 安全退出</a>
+		  </div>
+	
+	
+>>>>>>> 63878b0a156cae7a487cc9fc1e82775ad835358b
+	
+		<div class="my-curr-user dropdown">
+		
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
+			  <i class="fa fa-user" aria-hidden="true"></i>  管理员：xxx
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			    <a class="dropdown-item" href="#"><i class="fa fa-address-card" aria-hidden="true"></i> 个人信息</a>
+			    <a class="dropdown-item" href="#"><i class="fa fa-key" aria-hidden="true"></i> 修改密码</a>
+			    <a class="dropdown-item" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> 安全退出</a>
+			</div>
+		</div>
+</div>
+
+
+
+<div class="my-nav"  >
+
+
+	<div class="accordion" id="my-menu" style="color:white;">
+		
+		<!-- 菜单单元开始 -->
+		<div>
+			<div class="my-main-item" data-toggle="collapse" data-target="#my-safty" >
+				<i class="fa fa-user-circle" aria-hidden="true"></i> 安全管理
+			</div>
+			
+			<div id="my-safty" class="collapse " style="padding-left:30px;" data-parent="#my-menu" >
+				
+				<a href="#" class="my-sub-item" ><i class="fa fa-users"></i> 用户管理</a>			
+				<a href="#" class="my-sub-item" ><i class="fa fa-unlock-alt"></i> 用户密码重置</a>
+			
+			</div>
+		</div>
+		<!-- 菜单单元结束 -->
+		
+		<!-- 菜单单元开始 -->
+		<div>
+			<div class="my-main-item" data-toggle="collapse"  data-target="#my-info" >
+				<i class="fa fa-envelope-square" aria-hidden="true"></i> 个人消息
+			</div>
+			
+			<div id="my-info" class="collapse " style="padding-left:30px;" data-parent="#my-menu" >
+				
+				<a href="#" target="null" class="my-sub-item" ><i class="fa fa-envelope-open-o"></i> 未读消息</a>
+				<a href="#" class="my-sub-item" ><i class="fa fa-envelope-o"></i> 已读消息</a>
+				<a href="#" class="my-sub-item" ><i class="fa fa-trash-o"></i> 垃圾箱</a>
+			
+			</div>
+		</div>
+		<!-- 菜单单元结束 -->
+		
+		<!-- 菜单单元开始 -->
+		<div >
+			<div class="my-main-item" data-toggle="collapse" data-target="#my-books" >
+				<i class="fa fa-server"></i> 书籍管理
+			</div>
+			
+			<div id="my-books" class="collapse " style="padding-left:30px;" data-parent="#my-menu" >
+				
+				<a href="books.html"  target="contentFrame" class="my-sub-item" ><i class="fa fa-leanpub"></i> 书馆书库</a>			
+				<a href="#" class="my-sub-item" ><i class="fa fa-warning"></i> 超时提醒</a>
+				<a href="#" class="my-sub-item" ><i class="fa fa-bookmark"></i> 丢失报备</a>
+			</div>
+		</div>
+		
+		
+	</div>
+</div>
+
+
+
+<<<<<<< HEAD
+
+
+=======
+</div>
+>>>>>>> 63878b0a156cae7a487cc9fc1e82775ad835358b
+<div class="my-content"  ><iframe name="contentFrame"></iframe></div>
+<div class="my-copyright px-5"  style="display: flex; flex-direction:column; align-items: center; justify-content: center;"   >
+	
+	<div class="" style="color:#999999;">
+		Copyright © 2013-2018 xx图书馆  BOOKS.com All Rights Reserved. 备案号：陕ICP备15012807号-1
+	</div>
+	
+	<div class="" style="color:#999999; align-self: flex-end; ">
+		联系电话：231334325
+	</div>
+</div>
+
+
+
+
+
+<script src="resources/js/jquery.min.js" ></script>
+<script src="resources/js/bootstrap.bundle.min.js"></script>
+<script src="resources/layer/layer.js" ></script>
+<script src="resources/js/sweetalert.min.js" ></script>
+<script type="text/javascript" src="resources/js/vue.min.js"></script>
+<script type="text/javascript" src="resources/js/my.js"></script>
+<script type="text/javascript">
+new Vue({
+	el:'#app',
+	data:{
+		user:{},	
+	},
+	methods:{
+		logout(){
+			console.log(this.user);
+			My.operate(
+			{
+				url:'logOut',
+				title:'确定退出？',
+			},
+			()=>{
+				setTimeout(()=>{
+					window.location.href="login.html";
+				},1000);
+			});
+		}
+	},
+	mounted()
+	{//挂载完成的回调函数	
+		console.log("mounted");
+		//从服务端获取数据
+		My.loadData(
+				{
+					url:'getInfo'
+				},
+				(data) => { //处理服务器数据的回调函数
+					this.user=data;
+				});
+	}
+});
+</script>
+</body>
+</html>

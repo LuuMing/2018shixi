@@ -1,0 +1,240 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" >
+<link rel="stylesheet" href="resources/css/font-awesome.min.css" >
+ <style type="text/css">
+   
+   html{
+   	height:100%;
+   	width:100%;
+   }
+   
+   body{
+   		height:100%;
+		background-image:url('resources/images/311908165 (1).jpg');
+		background-size: 100% 100%; 
+   }
+   
+   #app{
+   	height:100%;
+   	width:100%;
+   	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+   }
+   
+   .my-center-block{	
+		z-index:2;
+		background-image:url('resources/images/170137741.jpg');
+		background-size: 100% 100%; 
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		
+		width:400px;
+		height:300px;
+		
+		border-style:outset;
+		border-width: 8px;
+		border-top-color:#FFE4C4;
+	    border-right-color:#A0522D;
+	    border-bottom-color:#8B4513;
+	    border-left-color:#FFEBCD;
+	    borfer-radius:25px;
+	}
+	
+	.my-logo{
+		position:fixed;
+		left:0px;
+		top:0px;
+		z-index:3;/*块的叠放层级，层级较高的会压在层级较低的上面*/
+	
+		
+	}
+   
+
+   </style>
+
+</head>
+<body>
+<div id="app">
+<!-- logo标志 -->
+	<div class="my-logo">
+		<img src="resources/images/logo.jpg" style="width:100px;"/>
+	</div>
+  
+<!-- 登录窗口 -->
+    <div class="my-center-block">
+	<div id="log-win" style="display:block;padding:15px;" >
+		<form>
+		  <div class="form-group" >
+		    <label for="cls-add-name" style="font-size:20px;font-family:微软雅黑;font-weight:bold;color:white;">
+		    	请输入学号
+		    </label>
+		    <input v-model="user.user_account" type="text" class="form-control" id="cls-add-name" placeholder="9位数字">		   
+		  </div>
+		  <div class="form-group">
+		    <label for="cls-add-remark" style="font-size:20px;font-family:微软雅黑;font-weight:bold;color:white;">
+		    	请输入密码
+		    </label>
+		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>
+		  <button @click="loginDo" type="button" class="btn btn-success" >登录</button>
+		  <button @click="regTo" type="button" class="btn btn-info">注册</button>
+		</form>
+	</div>
+	 </div>
+	
+	<!-- 注册页面 -->
+	<div id="reg-win" style="display: none;padding:15px;" >
+		<form>
+		  <div class="form-group">
+		    <label for="cls-add-name">请输入你的学号</label>
+		    <input v-model="user.user_account" type="text" class="form-control" id="cls-add-name" placeholder="9位数字">		   
+		  </div>
+		  <div class="form-group">
+		    <label for="cls-add-remark">请输入你的密码</label>
+		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>
+		   <div class="form-group">
+		    <label for="cls-add-remark">请输入你的姓名</label>
+		    <input v-model="user.user_name" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>  
+		 <label >选择你的性别</label>
+		<div>
+			<label >
+				<input type="radio" name="sexSelect" v-model="user.sex"  value="男" > 男
+			</label>
+			<label >
+				<input type="radio" name="sexSelect" v-model="user.sex"  value="女"> 女
+			</label>
+			</div>
+	 	<label>选择你职业</label>
+		<div>
+		<label >
+		<input type="radio" name="typeSelect"  v-model = "user.user_type" value="学生" >学生
+		</label>
+		<label >
+		<input type="radio" name="typeSelect"  v-model = "user.user_type"  value="教师"> 教师
+		</label>	
+		</div>       
+		  <center><button @click="regDo" type="button" class="btn btn-primary">确认</button></center>
+		</form>
+		</div>
+
+</div>
+	<!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
+<script src="resources/js/jquery.min.js" ></script>
+<script src="resources/js/bootstrap.bundle.min.js"></script>
+<script src="resources/layer/layer.js" ></script>
+<script src="resources/js/sweetalert.min.js" ></script>
+<script type="text/javascript" src="resources/js/vue.min.js"></script>
+<script type="text/javascript" src="resources/js/my.js"></script>
+
+<script type="text/javascript">
+	new Vue({
+		el:'#app',
+		data:{
+			user:{},
+		},
+		
+		methods:{
+			loginDo(){ //登录--start
+				My.ajax({
+							url:'logIn',
+							data:this.user,
+							handler(result){
+								if(result.success)
+								{
+										console.log("成功");
+										if(result.message == "admin")
+										{
+											window.location.href="./home.html";		
+										}
+										else 
+										{
+											window.location.href="./front-home.html";
+										}	
+								}
+								else{
+										swal({
+										 title: " 用户名或密码错误",											 
+										 icon: "error",
+										 button: "确定"
+											});
+								}
+							}
+						});
+			},				//登录--end
+			
+			regTo() //打开注册页面--start
+			{
+				this.regDlg = My.open(
+						{
+							title : '注册',
+							 contentId : 'reg-win'
+						});
+			}
+		,				//打开注册页面--end
+		
+		regDo() //确认注册--start
+		{
+			if  ( this.user.user_account == null|| this.user.pwd == null || this.user.user_name== null ||
+					this.user.sex == null || this.user.user_type== null)
+			{
+				console.log("空");
+				swal({
+					 title: " 请填写完整",											 
+					 icon: "error",
+					 button: "确定"
+				});
+				return;
+			}
+			console.log(this.user);
+			My.ajax({
+			url: 'toReg',
+			data: this.user,
+			handler(result){
+				console.log(result);
+				if(result.success){
+					console.log("成功");
+					swal({
+						 title: "注册成功，请登录",											 
+						 icon: "success",
+						 button: "确定"
+					});
+					 setTimeout(
+                             ()=>{
+                                     window.location.href='login.html';
+                             },
+                             1500                                     
+                     );
+				}else{
+					swal({
+						 title: "注册失败，用户名已被注册",											 
+						 icon: "error",
+						 button: "确定"
+					});
+					}
+			}
+			});
+		},		//	确认注册--end
+		},
+		
+		mounted()
+		{//挂载完成的回调函数	
+			
+		}
+		
+		
+	});
+
+</script>
+	
+	</body>
+	</html>

@@ -202,10 +202,38 @@ body{
 <script type="text/javascript" src="resources/js/vue.min.js"></script>
 <script type="text/javascript" src="resources/js/my.js"></script>
 <script type="text/javascript">
-	new Vue
-	({
+new Vue
+({
+	data:
+	{
+		user:{},
+		expire:[]
+	},	
+	mounted()
+	{//挂载完成的回调函数	
+		console.log("mounted");
+		//从服务端获取数据
+		My.loadData
+		(
+				{
+					url:'getInfo'
+				},
+				(data) => { //处理服务器数据的回调函数
+					this.user=data;
+				}
+		);
 		
-	});
+		My.loadData
+		(
+				{
+					url:'expireBook'
+				},
+				(data) => { //处理服务器数据的回调函数
+					this.expire=data;
+				}
+		);
+	}
+});
 </script>
 </body>
 </html>

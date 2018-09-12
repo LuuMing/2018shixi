@@ -21,10 +21,10 @@ public class UpdController
 	} 
 	
 	@RequestMapping("/infoUpd")
-	public Object infoupd(User newinfo,HttpSession session) 
+	public Object infoupd(User newinfo) 
 	{
-		System.out.println(newinfo.getUser_name()+newinfo.getSex());
-		MyDao.update("update users set user_name= ?, sex=? where user_account  = ?",newinfo.getUser_name(),newinfo.getSex(),session.getAttribute("loginUserId"));
+		//System.out.println(newinfo.getUser_name()+newinfo.getSex());
+		MyDao.update("update users set user_name= ?, sex=? where user_account  = ?",newinfo.getUser_name(),newinfo.getSex(),newinfo.getUser_account());
 		 return ResultDto.successResult("success");
 	} 
 }

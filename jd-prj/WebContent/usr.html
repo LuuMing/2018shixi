@@ -89,9 +89,9 @@
 			{
 				console.log(this.user);
 				My.ajax
-				({
+				({	
 							url:'infoUpd',
-						   data:{newinfo:this.user},
+						   data:this.user,
 							handler(result)
 							{
 							   if(result.success)

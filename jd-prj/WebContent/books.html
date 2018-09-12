@@ -27,7 +27,7 @@
 		    <div class="input-group-prepend">
 		      <div class="input-group-text">分类</div>
 		    </div>
-		    <select   class="form-control" id="goods-upd-cls" style="width:150px;" >
+		    <select class="form-control" id="goods-upd-cls" style="width:150px;" >
 			    	
 			    	<option value="">全部</option>
 			    	<option ></option>
@@ -37,41 +37,28 @@
 		  
 		  <div class="input-group ml-3">
 		    <div class="input-group-prepend">
-		      <div class="input-group-text">编号</div>
+		      <div class="input-group-text">书名</div>
 		    </div>
-		    <input  type="text" class="form-control"  style="width:150px;">
+		    <input v-model="bks.id"   type="text" class="form-control"  style="width:150px;">
 		  </div>
 		  
 		  <div class="input-group ml-3">
 		    <div class="input-group-prepend">
-		      <div class="input-group-text">名称</div>
+		      <div class="input-group-text">作者</div>
 		    </div>
-		    <input   type="text" class="form-control" style="width:150px;">
+		    <input    v-model="bks.author"  type="text" class="form-control" style="width:150px;">
 		  </div>
-		  <br/>
-		  <div class="input-group mt-3">
-		    <div class="input-group-prepend">
-		      <div class="input-group-text">说明</div>
-		    </div>
-		    <input  type="text" class="form-control" style="width:150px;">
-		  </div>
+		  
 		
-		  <div class="input-group mt-3 ml-3">
-		    <div class="input-group-prepend">
-		      <div class="input-group-text">价格</div>
-		    </div>
-		    <input  type="text" class="form-control" style="width:150px;">
-		    	<span style="vertical-align: middle;line-height:40px;">至</span>
-		    <input    type="text" class="form-control" style="width:150px;">
-		  </div>	
+		 	
 	  		
-	  	<button type="button" class="btn btn-primary mt-3 ml-3">查询</button>
+	  	<button @click="queryBooks" type="button" class="btn btn-primary mt-3 ml-3">查询</button>
 	  	
 	</form>
 	
 	<div class="btn-group" style="margin-bottom:10px;" >
 	  <button @click="booksAddTo"  type="button" class="btn btn-primary"><i class="fa fa-plus-circle" ></i>&nbsp;新增</button>
-	  <button  type="button" class="btn btn-danger"><i class="fa fa-trash"></i> 删除</button>
+	  <button  @click="booksDelMultiDo" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> 删除</button>
 	  
 	</div>
 	
@@ -294,7 +281,9 @@ new Vue({
 			);
 		},
 		//执行删除-start
-		booksDelDo(book){
+		booksDelDo(book)
+		{
+			
 			My.operate(
 					{
 						title:'您确实要删除该商品信息吗？',
@@ -311,6 +300,61 @@ new Vue({
 			);
 		},
 		//执行删除-end
+	
+	//执行批量删除-start
+	booksDelMultiDo()
+	{
+		
+		
+		//js中 undefined 、 null 、 0 都可以自动转化为假（false）
+		if(!this.ids || this.ids.length==0){
+			swal("请选择数据！", "", "info");
+			return;
+		}
+		
+		
+		
+		My.operate(
+				{
+					title:'您确实要删除这些商品信息吗？',
+					text:'如果一旦删除，则无法恢复！',
+					url:'booksDelMultiDo',
+					data:{ids:this.ids}
+				},
+				
+				() => {
+					this.loadBookList();
+					My.close(this.dlg);
+					this.ids=[];//清除数据
+				}
+		
+		);
+	},
+	//执行批量删除-end
+	
+	queryBooks()
+	{
+		My.loadData(
+				{
+					url:'queryBooks',
+					data:this.bks
+				},
+				
+				(data) => { //处理服务器数据的回调函数
+					
+					
+					this.books=data;
+				
+					
+				}
+		);
+	},
+	
+	
+	
+	
+	
+	
 	
 	
 	

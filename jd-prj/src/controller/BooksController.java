@@ -31,7 +31,7 @@ public class BooksController {
 	@RequestMapping("/loadBookList")
 	public Object getAllCls() {
 		
-		//��ѯ��������
+		//锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷
 		return MyDao.queryMapList("select * from books");
 	}
 	
@@ -42,11 +42,11 @@ public class BooksController {
 		return MyDao.queryMapList("select * from goods where g_id=?", cls_id);
 	}*/
 	
-	@RequestMapping("/goodsQueryList")
+	@RequestMapping("/queryBooks")
 	public Object getGoodsQueryList(Books gd) {
 		
-		String sql="select *,c.cls_name "
-				+ "from books g left join cls c on g.g_cls=c.cls_id "
+		String sql="select g.*,c.type_name "
+				+ "from books g left join book_type c on g.books_type=c.id "
 				+ "where 1=1";
 		
 		
@@ -55,15 +55,15 @@ public class BooksController {
 		
 		if(gd!=null) {
 			if(gd.getId()!=null) {
-				sql+=" and g.g_id like ?";
+				sql+=" and g.id like ?";
 				list.add("%"+gd.getId()+"%");
 			}
 			if(gd.getName()!=null) {
-				sql+=" and g.g_name like ?";
+				sql+=" and g.name like ?";
 				list.add("%"+gd.getName()+"%");
 			}
 			if(gd.getAuthor()!=null) {
-				sql+=" and g.g_remark like ?";
+				sql+=" and g.author like ?";
 				list.add("%"+gd.getAuthor()+"%");
 			}
 			
@@ -77,16 +77,16 @@ public class BooksController {
 	public Object addGoods(Books goods) {
 		
 		try {
-			//��ȡ�ļ���ԭʼ����
+			//锟斤拷取锟侥硷拷锟斤拷原始锟斤拷锟斤拷
 			String fileName = goods.getBooks_images().getOriginalFilename();
 			System.out.println("filename:"+fileName);
-			//��Ŀ���ļ��Ĵ�ŵ�·��
+			//锟斤拷目锟斤拷锟侥硷拷锟侥达拷诺锟铰凤拷锟�
 			String path = "/resources/images/" + fileName;
-			//��ȡ�ļ���ʵ·��
+			//锟斤拷取锟侥硷拷锟斤拷实路锟斤拷
 			String realpath = servletContext.getRealPath(path);
-			//��ȡ�ļ����ݣ��ֽ����飩
+			//锟斤拷取锟侥硷拷锟斤拷锟捷ｏ拷锟街斤拷锟斤拷锟介）
 			byte[] bytes = goods.getBooks_images().getBytes();
-			//����ļ�
+			//锟斤拷锟斤拷募锟�
 			MyUtils.save(realpath, bytes);
 			
 			MyDao.update(
@@ -94,10 +94,10 @@ public class BooksController {
 							+ "values(?       ,?    ,?    )",
 					goods.getName(), goods.getAuthor(), fileName);
 			
-			return ResultDto.successResult("������Ʒ��Ϣ�ɹ���");
+			return ResultDto.successResult("锟斤拷锟斤拷锟斤拷品锟斤拷息锟缴癸拷锟斤拷");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResultDto.failResult("������Ʒ��Ϣʧ�ܣ�");
+			return ResultDto.failResult("锟斤拷锟斤拷锟斤拷品锟斤拷息失锟杰ｏ拷");
 		}
 		
 	}
@@ -135,18 +135,18 @@ public class BooksController {
 		
 		try {
 			if(book.getBooks_images()!=null && book.getBooks_images().getSize()>0) {
-				//��ȡ�ļ���ԭʼ����
+				//锟斤拷取锟侥硷拷锟斤拷原始锟斤拷锟斤拷
 				String fileName = book.getBooks_images().getOriginalFilename();
 				fileName = getNewNum()+fileName.substring(fileName.lastIndexOf("."));
 				System.out.println("filename:"+fileName);
-				//��Ŀ���ļ��Ĵ�ŵ�·��
+				//锟斤拷目锟斤拷锟侥硷拷锟侥达拷诺锟铰凤拷锟�
 				//String path = "/resources/images/books/" + fileName;
-				//��ȡ�ļ���ʵ·��
+				//锟斤拷取锟侥硷拷锟斤拷实路锟斤拷
 				//String realpath = servletContext.getRealPath(path);
 				String realpath = "E:/imgs/books/"+fileName;   //linux "/home/luming/imgs/books/"
-				//��ȡ�ļ����ݣ��ֽ����飩
+				//锟斤拷取锟侥硷拷锟斤拷锟捷ｏ拷锟街斤拷锟斤拷锟介）
 				byte[] bytes = book.getBooks_images().getBytes();
-				//����ļ�
+				//锟斤拷锟斤拷募锟�
 				MyUtils.save(realpath, bytes);
 				
 				MyDao.update(
@@ -169,10 +169,10 @@ public class BooksController {
 			}
 			
 			
-			return ResultDto.successResult("�޸���Ʒ��Ϣ�ɹ���");
+			return ResultDto.successResult("锟睫革拷锟斤拷品锟斤拷息锟缴癸拷锟斤拷");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResultDto.failResult("�޸���Ʒ��Ϣʧ�ܣ�");
+			return ResultDto.failResult("锟睫革拷锟斤拷品锟斤拷息失锟杰ｏ拷");
 		}		
 		
 }		
@@ -189,16 +189,16 @@ public class BooksController {
 				id);
 		
 		
-		return ResultDto.successResult("ɾ����Ʒ��Ϣ�ɹ���");
+		return ResultDto.successResult("删锟斤拷锟斤拷品锟斤拷息锟缴癸拷锟斤拷");
 		
 	}
 	
-	@RequestMapping("/goodsDelMultiDo")
-	public Object delGoodsMulti(@RequestParam(value="g_ids[]",required=false) Integer[] g_ids) {
+	@RequestMapping("/booksDelMultiDo")
+	public Object delGoodsMulti(@RequestParam(value="ids[]",required=false) Integer[] g_ids) {
 		
 		
 		if(g_ids==null || g_ids.length==0) {
-			return ResultDto.failResult("��ûѡ���κ����ݣ�");
+			return ResultDto.failResult("锟斤拷没选锟斤拷锟轿猴拷锟斤拷锟捷ｏ拷");
 		}
 		
 		int i;
@@ -210,7 +210,7 @@ public class BooksController {
 		
 		
 		
-		return ResultDto.successResult("ɾ����Ʒ��Ϣ�ɹ���");
+		return ResultDto.successResult("删锟斤拷锟斤拷品锟斤拷息锟缴癸拷锟斤拷");
 		
 	}
 }

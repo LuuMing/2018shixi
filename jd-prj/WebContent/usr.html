@@ -11,32 +11,62 @@
 
 
 <div id="app" class="container-fluid" style="padding:0 2px 0 2px;" >
-	<div class="container" v-model = "user">
-  	<div class="row">
-    	<div class="col">帐号</div>
-    	<div class="col">{{user.user_account}}</div>
-    <div class="w-100"></div>
-    	<div class="col">姓名</div>
-    	<div class="col">{{user.user_name}}</div>
-     <div class="w-100"></div>
-    	<div class="col">性别</div>
-    	<div class="col">{{user.sex}}</div>
-    <div class="w-100"></div>
-    	<div class="col">用户类型</div>
-    	<div class="col">{{user.usr_type}}</div>
-    <div class="w-100"></div>
-    	<div class="col">注册时间</div>
-    	<div class="col">{{user.begDat}}</div>
-    <div class="w-100"></div>
-    	<div class="col">到期时间</div>
-    	<div class="col">{{user.endDat}}</div>
-    <div class="w-100"></div>
-    	<div class="col">最大借阅量</div>
-    	<div class="col">{{user.cnt}}</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">帐号</span>
   </div>
-</div>
+  <input  class="form-control" type="text" :placeholder="user.user_account" readonly>
 </div>
 
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">姓名</span>
+  </div>
+  <input v-model="user.user_name" class="form-control" type="text" :placeholder="user.user_name" >
+</div>
+
+<div>
+
+<label >
+<input type="radio" name="sexSelect" v-model="user.sex"  value="男" > 男
+</label>
+<label >
+<input type="radio" name="sexSelect" v-model="user.sex"  value="女"> 女
+</label>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">用户类型</span>
+  </div>
+  <input  class="form-control" type="text" :placeholder="user.user_type" readonly>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">注册时间</span>
+  </div>
+  <input  class="form-control" type="text" :placeholder="user.begDat" readonly>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">到期时间</span>
+  </div>
+  <input  class="form-control" type="text" :placeholder="user.endDat" readonly>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">最大借阅量</span>
+  </div>
+  <input  class="form-control" type="text" :placeholder="user.cnt" readonly>
+</div>
+
+<button  @click="upd_win_info"  type="button" class="btn btn-primary btn-lg">更新信息</button>
+<button  @click="load_data"  type="button" class="btn btn-secondary btn-lg">重置</button>
+</div>
 
 <!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
 <script src="resources/js/jquery.min.js" ></script>
@@ -55,18 +85,48 @@
 		},
 		methods:
 		{
-				
+			upd_win_info()
+			{
+				console.log(this.user);
+				My.ajax
+				({
+							url:'infoUpd',
+						   data:{newinfo:this.user},
+							handler(result)
+							{
+							   if(result.success)
+								{
+								   swal({
+										 title: " 修改成功",											 
+										 icon: "success",
+									});
+								}
+							   else
+							   {
+								   swal({
+										 title: " 修改失败",											 
+										 icon: "error",
+									});
+							   }
+							}
+				});
+			},
+		
+			load_data()
+			{
+				console.log("load");
+				My.loadData(
+						{
+							url:'getInfo'
+						},
+						(data) => { //处理服务器数据的回调函数
+							this.user=data;
+						});
+			}
 		},		
-		mounted(){//挂载完成的回调函数
-			My.loadData(
-					{
-						url:'getInfo'
-					},
-					(data) => { //处理服务器数据的回调函数
-						this.user=data;
-					});
-		console.log("mounted");
-		console.log(this.user);
+		mounted()//挂载完成的回调函数
+		{
+			this.load_data();
 		}
 	});
 </script>

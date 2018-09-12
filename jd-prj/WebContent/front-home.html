@@ -13,7 +13,7 @@ body{
 	}
 	.my-stare{		
 		/* 		z-index:2;/*块的叠放层级，层级较高的会压在层级较低的上面*/ 
-		width:100%;		
+		width:1903px;		
 		height:50px;	
 		font-size:14px;
 		font-weight:bold;/*文字加粗*/
@@ -23,6 +23,7 @@ body{
 	    background-repeat: no-repeat,repeat;
 	    background-size:200px 50px,600px 50px;		
 		background-color: #D0D0D0;	
+		position:relative;
 	}
 	.my-stare-top{	
 
@@ -37,7 +38,7 @@ body{
 	}
 	.my-logo{
 		margin:10px 0 10px 0; 		
-		width:100%;		
+		width:1903px;		
 		height:80px;			
 		background-image: url(resources/images/admin/left.jpg), url(resources/images/front-home/frontbooks.jpg);
 	    background-position: left,right;
@@ -51,16 +52,17 @@ body{
 		background-color: #AAAAAA;
 	}
 	.my-title{	
-		width:100%;		
-		height:40px;			
+		width:1903px;		
+		height:60px;			
 		font-size:14px;
 		font-weight:bold;/*文字加粗*/
 		font-family: 微软雅黑;
 	    line-height:40px;/*行高，文字在行高范围内自动居中*/
 		background-color:#12345678;
+		margin:0px 0 10px 0;
 	}	
 	.my-roll{
-		width:100%;	
+		width:1903px;	
 		height:600px;
 		background-image:url('resources/images/front-home/138788346.jpg');
 		background-size: 100% 100%; 
@@ -82,7 +84,7 @@ body{
 	.my-message{
 		/* position:fixed;
 		top:790px; */
-		width:100%;	
+		width:1903px;	
 		height:1000px;
 		/* left:0px; */
 		background-image:url('resources/images/front-home/148934767.jpg');
@@ -111,7 +113,7 @@ body{
 		position:absolute;
 		left:0px;		
 		bottom:0px;		
-		width:100%;
+		width:1903px;
 		height:80px;
 		background-color: #112233;	
 	}
@@ -139,8 +141,27 @@ body{
  			旅人书馆
  		</div>
  	<!-- 下拉菜单 -->
- 		<div class="my-title" >
- 			
+ 		<div class="my-title bg-dark" >
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			  <a class="navbar-brand" href="#">旅人书馆</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+			    <ul class="navbar-nav">
+			      <li class="nav-item ">
+			        <a class="nav-link" href="#">个人信息</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">借阅信息</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">查找书目</a>
+			      </li>
+			      
+			    </ul>
+			  </div>
+			</nav>
  		</div>
  	<!-- 内容滚动块 -->
 		<div class="my-roll">

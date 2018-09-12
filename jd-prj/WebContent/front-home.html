@@ -113,11 +113,9 @@ body{
 </style>
 
 
-
-
-
 </head>
 <body>
+<div id="app">  <!-- Vue--start -->
 
 	<!-- 顶部 -->
  		<div class="my-stare" >
@@ -190,16 +188,12 @@ body{
 	
 			<div class="" style="color:#999999;">
 				Copyright © 2013-2018 xx图书馆  BOOKS.com All Rights Reserved. 备案号：陕ICP备15012807号-1
-			</div>
-			
+			</div>	
 			<div class="" style="color:#999999; align-self: flex-end; ">
 				联系电话：231334325
 			</div>
 		</div>
-
-
-
-
+</div>   <!-- Vue--end -->
 <!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
 <script src="resources/js/jquery.min.js" ></script>
 <script src="resources/js/bootstrap.bundle.min.js"></script>
@@ -207,5 +201,11 @@ body{
 <script src="resources/js/sweetalert.min.js" ></script>
 <script type="text/javascript" src="resources/js/vue.min.js"></script>
 <script type="text/javascript" src="resources/js/my.js"></script>
+<script type="text/javascript">
+	new Vue
+	({
+		
+	});
+</script>
 </body>
 </html>

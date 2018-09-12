@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,8 @@ public class PwdUpdController
 	@RequestMapping("/pwdUpd")
 	public Object pwdupd(String newPwd,HttpSession session) 
 	{
-			MyDao.update("update users set pwd=? where user_account= ?", newPwd,session.getAttribute("loginUserId"));
-			return ResultDto.successResult("success");
+		//System.out.println(newPwd+"  newpwd");  
+		MyDao.update("update users set pwd=? where user_account= ?", newPwd,session.getAttribute("loginUserId"));
+		 return ResultDto.successResult("success");
 	} 
 }

@@ -293,8 +293,8 @@ new Vue({
 	el:'#app',
 	data:{
 		user:{},	
-		updPwd:{},
-		updPwd2:{}
+		updPwd:'',
+		updPwd2:''
 	},
 	methods:{
 		logout(){
@@ -346,16 +346,27 @@ new Vue({
 			}
 			else
 			{
+				console.log(this.updPwd);
 				My.ajax
 				({
 							url:'pwdUpd',
-						   data:this.updPwd,
+						   data:{newPwd:this.updPwd},
 							handler(result)
 							{
-								setTimeout
-								(
-										()=>{ 	window.location.href="home.html";  },1000	
-								);	
+							   if(result.success)
+								{
+								   swal({
+										 title: " 修改成功",											 
+										 icon: "success",
+									});
+								}
+							   else
+							   {
+								   swal({
+										 title: " 修改失败",											 
+										 icon: "error",
+									});
+							   }
 							}
 				});
 			}

@@ -7,65 +7,86 @@
 <link rel="stylesheet" href="resources/css/bootstrap.min.css" >
 <link rel="stylesheet" href="resources/css/font-awesome.min.css" >
 </head>
+<style  type="text/css">
+
+   html{
+   	height:100%;
+   	width:100%;
+   }
+	body{
+		height:100%;
+		background-image:url('resources/images/admin/165394258.jpg');
+		background-size: 100% 100%;
+		position:relative;
+	}
+	
+	.my-message{
+	padding:100px 0 0 500px;
+	position:absolute;
+	}
+</style>
+
 <body>
 
 
-<div id="app" class="container-fluid" style="padding:0 2px 0 2px;" >
+<div id="app" class="container-fluid " style="padding:0 2px 0 2px;" >
+	<div class="my-message">
+		<div class="input-group mb-3"  style="width:300px;">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon1">帐号</span>
+		  </div>
+		  <input  class="form-control" type="text"   :placeholder="user.user_account" readonly>
+		</div>
+		
+		<div class="input-group mb-3" style="width:300px;">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon1">姓名</span>
+		  </div>
+		  <input v-model="user.user_name" class="form-control" type="text" :placeholder="user.user_name" >
+		</div>
+		
+		<div>
+		
+		<label >
+		<input type="radio" name="sexSelect" v-model="user.sex"  value="男" > 男
+		</label>
+		<label >
+		<input type="radio" name="sexSelect" v-model="user.sex"  value="女"> 女
+		</label>
+		</div>
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">帐号</span>
-  </div>
-  <input  class="form-control" type="text" :placeholder="user.user_account" readonly>
-</div>
+		<div class="input-group mb-3" style="width:300px;"> 
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon1">用户类型</span>
+		  </div>
+		  <input  class="form-control" type="text" :placeholder="user.user_type" readonly>
+		</div>
+		
+		<div class="input-group mb-3" style="width:300px;">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon1">注册时间</span>
+		  </div>
+		  <input  class="form-control" type="text" :placeholder="user.begdat" readonly>
+		</div>
+		
+		<div class="input-group mb-3" style="width:300px;">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon1">到期时间</span>
+		  </div>
+		  <input  class="form-control" type="text" :placeholder="user.enddat" readonly>
+		</div>
+		
+		<div class="input-group mb-3"  style="width:300px;">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon1">最大借阅量</span>
+		  </div>
+		  <input  class="form-control" type="text" :placeholder="user.cnt" readonly>
+	
+	</div>
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">姓名</span>
-  </div>
-  <input v-model="user.user_name" class="form-control" type="text" :placeholder="user.user_name" >
-</div>
-
-<div>
-
-<label >
-<input type="radio" name="sexSelect" v-model="user.sex"  value="男" > 男
-</label>
-<label >
-<input type="radio" name="sexSelect" v-model="user.sex"  value="女"> 女
-</label>
-</div>
-
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">用户类型</span>
-  </div>
-  <input  class="form-control" type="text" :placeholder="user.user_type" readonly>
-</div>
-
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">注册时间</span>
-  </div>
-  <input  class="form-control" type="text" :placeholder="user.begDat" readonly>
-</div>
-
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">到期时间</span>
-  </div>
-  <input  class="form-control" type="text" :placeholder="user.endDat" readonly>
-</div>
-
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">最大借阅量</span>
-  </div>
-  <input  class="form-control" type="text" :placeholder="user.cnt" readonly>
-</div>
-
-<button  @click="upd_win_info"  type="button" class="btn btn-primary btn-lg">更新信息</button>
-<button  @click="load_data"  type="button" class="btn btn-secondary btn-lg">重置</button>
+		<button  @click="upd_win_info"  type="button" class="btn btn-primary btn-lg">更新信息</button>
+		<button  @click="load_data"  type="button" class="btn btn-secondary btn-lg">重置</button>
+	</div>
 </div>
 
 <!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->

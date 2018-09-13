@@ -204,6 +204,24 @@ body{
 				联系电话：231334325
 			</div>
 		</div>
+<!-- 提醒页面 -->
+	<div id="alert-win" style="display: none;padding:15px;" >
+		<form>
+		  <div class="form-group">
+		    <label for="cls-add-name">请输入你的学号</label>
+		    <input v-model="user.user_account" type="text" class="form-control" id="cls-add-name" placeholder="9位数字">		   
+		  </div>
+		  <div class="form-group">
+		    <label for="cls-add-remark">请输入你的密码</label>
+		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>
+		   <div class="form-group">
+		    <label for="cls-add-remark">请输入你的姓名</label>
+		    <input v-model="user.user_name" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
+		  </div>       
+		  <center><button type="button" class="btn btn-primary">确认</button></center>
+		</form>
+		</div>
 </div>   <!-- Vue--end -->
 <!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
 <script src="resources/js/jquery.min.js" ></script>
@@ -215,11 +233,17 @@ body{
 <script type="text/javascript">
 new Vue
 ({
+	el:'#app',
 	data:
 	{
 		user:{},
-		expire:[]
+		expire:[],
+		dlg:null
 	},	
+	methods:
+	{
+		
+	},
 	mounted()
 	{//挂载完成的回调函数	
 		console.log("mounted");
@@ -243,6 +267,15 @@ new Vue
 					this.expire=data;
 				}
 		);
+		console.log(this.expire.length);
+		if(this.expire.length> 0)
+		{
+			this.dlg = My.open(
+					{
+						title : '超期提醒',
+						 contentId : 'alert-win'
+					});
+		}
 	}
 });
 </script>

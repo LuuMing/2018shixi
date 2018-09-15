@@ -5,6 +5,11 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
+
+	public Boolean valid() //判断有效数据--start
+	{
+		return user_account != null && user_name != null && sex != null && pwd != null && user_type != null;
+	}											//判断有效数据--end
 	public Integer getId() {
 		return id;
 	}
@@ -65,10 +70,6 @@ public class User {
 	public void setCnt(Integer cnt) {
 		this.cnt = cnt;
 	}
-	public Boolean valid() //判断有效数据--start
-	{
-		return user_account != null && user_name != null && sex != null && pwd != null && user_type != null;
-	}											//判断有效数据--end
 	Integer id;
 	String user_account;
 	String user_name;

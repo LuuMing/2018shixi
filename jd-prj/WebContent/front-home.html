@@ -152,12 +152,12 @@ body{
 			        <a class="nav-link" href="#"><i class="fa fa-navicon"></i> 借阅信息</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="borrow.html"><i class="fa fa-search"></i> 查找书目</a>
+			        <a class="nav-link" href="usr.html"><i class="fa fa-search"></i> 查找书目</a>
 			      </li>
 			      
 				  <li class="nav-item dropdown justify-content-end">
 			        <a class="nav-link dropdown-toggle "  href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" >
-			         	<i class="fa fa-user"></i>  当前用户为：
+			         	<i class="fa fa-user" v-model="user.user_name"></i>  当前用户为：{{user.user_name}}
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 			          <a class="dropdown-item" href="usr.html"  ><i class="fa fa-address-card-o"></i>个人信息</a>

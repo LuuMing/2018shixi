@@ -170,7 +170,7 @@ body{
 			         	<i class="fa fa-user"></i>  当前用户为：
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-			          <a class="dropdown-item" href="#"><i class="fa fa-address-card-o"></i> 个人信息</a>
+			          <a class="dropdown-item" @click="alert"><i class="fa fa-address-card-o"></i> 个人信息</a>
 			          <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> 修改密码</a>
 			          <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> 安全退出</a>
 			        </div>
@@ -194,25 +194,30 @@ body{
 			</div>
 		</div>
 <!-- 提醒页面 -->
+<!-- 提醒页面 -->
 	<div id="alert-win" style="display: none;padding:15px;" >
-		<form>
-		  <div class="form-group">
-		    <label for="cls-add-name">请输入你的学号</label>
-		    <input v-model="user.user_account" type="text" class="form-control" id="cls-add-name" placeholder="9位数字">		   
-		  </div>
-		  <div class="form-group">
-		    <label for="cls-add-remark">请输入你的密码</label>
-		    <input v-model="user.pwd" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
-		  </div>
-		   <div class="form-group">
-		    <label for="cls-add-remark">请输入你的姓名</label>
-		    <input v-model="user.user_name" type="text" class="form-control" id="cls-add-remark" placeholder="不少于6位">		   
-		  </div>       
-		  <center><button type="button" class="btn btn-primary">确认</button></center>
-		</form>
-		</div>
-		
-		 <div>
+		<table class="table table-sm table-hover">	 
+	 	<thead>
+	 		<tr>
+	 			<th>书目编号</th>
+	 			<th style="width:200px;">书目名称</th>
+	 			<th>借阅时间</th>
+	 			<th> 应还时间</th>
+	 		</tr>
+	 	</thead>
+	 	<tbody>
+	 		<tr v-for="book in expire">
+	 			<td class="align-middle">{{book.id}}</td>
+	 			<td class="align-middle">{{book.name}}</td>
+	 			<td class="align-middle">{{book.lddat}}</td>
+	 			<td class="align-middle">{{book.enddat}}</td>
+	 			</td>
+	 		</tr>
+	 	</tbody>
+	</table>
+</div>
+
+<div>
  	<!-- 内容滚动块 -->
 		<div class="my-roll">
 			<div class="my-roll-block">
@@ -264,15 +269,28 @@ new Vue
 	{
 		user:{},
 		expire:[],
-		dlg:null
+		dlg:null,
 	},	
 	methods:
 	{
-		
+		alert()
+		{	
+			console.log("user");
+			console.log(this.user);
+			console.log("expire:::");
+			console.log(this.expire);
+			if(this.expire.length > 0)
+			{
+				this.dlg = My.open(
+						{
+							title : '超期提醒',
+							 contentId : 'alert-win'
+						});
+			}	
+		}
 	},
 	mounted()
 	{//挂载完成的回调函数	
-		console.log("mounted");
 		//从服务端获取数据
 		My.loadData
 		(
@@ -293,15 +311,14 @@ new Vue
 					this.expire=data;
 				}
 		);
-		console.log(this.expire.length);
-		if(this.expire.length> 0)
-		{
-			this.dlg = My.open(
-					{
-						title : '超期提醒',
-						 contentId : 'alert-win'
-					});
-		}
+		console.log("mounted");
+		 setTimeout(
+                 ()=>{
+                	 this.alert();
+                 },
+                 3000                                     
+         );
+		
 	}
 });
 </script>

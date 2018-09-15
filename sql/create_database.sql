@@ -13,10 +13,11 @@ create table users (
 	maxCap int,
 	cnt int,
 	log varchar(100),
-	primary key(id)
+	primary key(id),
+	maxDay int
 );
 
-insert into users(user_account,user_name,sex,pwd,usr_type) values ("1","LuMing","男","1","admin");
+insert into users(user_account,user_name,sex,pwd,usr_type,maxDay) values ("1","LuMing","男","1","admin",1);
 insert into users(user_account,user_name,sex,pwd,usr_type) values ("user","LuMing","男","1","user");
 
 

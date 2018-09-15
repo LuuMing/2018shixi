@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>there are many books </title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" >
+<link rel="stylesheet" href="resources/css/font-awesome.min.css" >
+</head>
+<body>
+
+
+
+<div id="app" class="container-fluid" style="padding:0 2px 0 2px;" >
+
+
+	<nav>
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item">书目信息</li>
+	  </ol>
+	</nav>
+	
+	
+	<form class="form-inline mb-3">
+		
+		  
+		  
+		  <div class="input-group ml-3">
+		    <div class="input-group-prepend">
+		      <div class="input-group-text">书名</div>
+		    </div>
+		    <input v-model="bks.name"   type="text" class="form-control"  style="width:150px;">
+		  </div>
+		  
+		  <div class="input-group ml-3">
+		    <div class="input-group-prepend">
+		      <div class="input-group-text">作者</div>
+		    </div>
+		    <input    v-model="bks.author"  type="text" class="form-control" style="width:150px;">
+		  </div>
+		  
+	  	<button @click="queryBooks" type="button" class="btn btn-primary mt-3 ml-3">查询</button>
+	  	
+	</form>
+	
+	<div class="btn-group" style="margin-bottom:10px;" >
+	  <button @click="booksAddTo"  type="button" class="btn btn-primary"><i class="fa fa-plus-circle" ></i>&nbsp;批量借阅</button>
+	  
+	</div>
+	
+	
+	
+
+	<table class="table table-sm table-hover">
+	 
+	 	<thead>
+	 		<tr>
+	 			<th>选择</th>
+	 			<th>书目编号</th>
+	 			<th style="width:200px;">书目名称</th>
+	 			<th>书目作者</th>
+	 			<th>书目图片</th>
+	 			<th>操作</th>
+	 		</tr>
+	 	
+	 	</thead>
+	 	
+	 	<tbody>
+	 	
+	 		<tr v-for="book in books">
+	 			<td class="align-middle"><input type="checkbox" v-model="ids" :value="book.id" /></td>
+	 			<td class="align-middle">{{book.id}}</td>
+	 			<td class="align-middle">{{book.name}}</td>
+	 			<td class="align-middle">{{book.author}}</td>
+	 			<td class="align-middle"><img :src="'images/books?filename='+book.books_images" style="width:50px;" /></td>
+	 			<td class="align-middle">
+	 				<a href="#"  @click="booksBorrow(book)" >借阅</a>
+	 			</td>
+	 		</tr>
+	 		
+	 		
+	 	</tbody>
+	
+	</table>
+	
+	
+	<!-- 修改窗口的内容 -->
+	<div id="books-win-upd" style="display: none; padding:15px">
+	  <form ref="updform">
+	   	   <div class="form-group" id="cls-add-book">
+		    <label>书目名称</label>
+		    <input v-model="bks.id" name="id" type="text" class="form-control"  placeholder="请输入书目名称">		   
+		  </div>
+		  <div class="form-group" id="cls-add-book">
+		    <label>书目名称</label>
+		    <input v-model="bks.name" name="name" type="text" class="form-control"  placeholder="请输入书目名称">		   
+		  </div>
+		  <div class="form-group">
+		    <label>作者名称</label>
+		    <input v-model="bks.author" name="author" type="text" class="form-control" placeholder="请输入作者名称">		   
+		  </div>
+		  <div class="form-group">
+		    <label>商品图片</label>
+		    <img :src="'resources/images/books/'+books.books_images" style="width:50px;"/>
+		    <input  name="books_images" type="file" class="form-control-file">		   
+		  </div>
+		  <button @click="booksUpdDo" type="button" class="btn btn-primary">提交</button>
+		</form>
+	
+	
+	</div>
+	
+	<!-- 添加窗口的内容 -->
+	<div id="books-win-add" style="display: none; padding:15px">
+	  <form ref="addform">
+	   	   <div class="form-group">
+		    <label>书目编号</label>
+		    <input v-model="bks.id" name="id" type="text" class="form-control"  placeholder="请输入书目名称">		   
+		  </div>
+		  <div class="form-group" >
+		    <label>书目名称</label>
+		    <input v-model="bks.name" name="name" type="text" class="form-control"  placeholder="请输入书目名称">		   
+		  </div>
+		  <div class="form-group">
+		    <label>作者名称</label>
+		    <input v-model="bks.author" name="author" type="text" class="form-control" placeholder="请输入作者名称">		   
+		  </div>
+		  <div class="form-group">
+		    <label>商品图片</label>
+		    <img :src="'resources/images/books/'+books.books_images" style="width:50px;"/>
+		    <input  name="books_images" type="file" class="form-control-file">		   
+		  </div>
+		  <button @click="booksAddDo" type="button" class="btn btn-primary">提交</button>
+		</form>
+	</div>
+
+</div>
+
+<!-- 在body结尾之前引入以下js文件。 注意导入顺序不可以随意改变。 -->
+<script src="resources/js/jquery.min.js" ></script>
+<script src="resources/js/bootstrap.bundle.min.js"></script>
+<script src="resources/layer/layer.js" ></script>
+<script src="resources/js/sweetalert.min.js" ></script>
+<script src="resources/js/vue.min.js"></script>
+<script src="resources/js/my.js"></script>
+
+<script type="text/javascript">
+new Vue({
+	
+	el:'#app',
+	
+	data:{
+		//绑定查询
+		
+		
+		books:[],
+		
+		ids:[],
+		
+		dlg:null,
+		
+		bks:{},
+		
+		
+	},
+	
+
+	
+	//定义Vue对象的实例方法
+	methods:{
+	
+		
+		
+		loadBookList()
+		{
+			My.loadData(
+					{
+						url:'loadBookList'
+					},
+					
+					(data) => { //处理服务器数据的回调函数
+						this.books=data;
+					}
+			);
+		},//加载分类信息-end
+		
+		//弹出修改窗体-end
+		booksUpdDo()
+		{
+			var param = new FormData(this.$refs.updform);
+			 
+			My.operateMultipartData(
+			{
+				title:'你确定要提交该数据',
+				text:'想好了就干',
+				url:'booksUpdDo',
+				data:param
+			},
+			()=>{
+				My.loadData(
+						{
+							url:'loadBookList'
+						},
+						
+						(data) => { //处理服务器数据的回调函数
+							this.books=data;
+						}
+				);
+				My.close(this.dlg);
+			}
+			
+			);
+		},
+		
+		
+		booksAddTo(){
+			My.loadData({
+				url:'loadBookList'
+			},
+			(data)=>{
+				
+				this.books=data;
+				this.addbooks={};
+				
+				this.dlg=My.open({
+					title:'新增商品信息',
+					contentId:'books-win-add'					
+					
+				});
+			});
+			
+		},
+		
+		booksAddDo()
+		{
+			var param = new FormData(this.$refs.addform);
+			
+			//带有文件上传的参数提交
+			My.operateMultipartData(
+					{
+						title:'您确实要提交该数据吗？',
+						text:'如果。。。。，则。。。。。！',
+						url:'booksAddDo',
+						data:param
+					},
+					
+					() => {
+						this.loadBookList();
+						My.close(this.dlg);
+					}
+			
+			);
+		},
+		//执行删除-start
+		booksBorrow(book)
+		{
+			My.operate
+			(
+					{
+						title:'您确实要借阅这本书吗？',
+						text:'如果一旦借阅，您将要爱护它！',
+						url:'booksBorrowDo',
+						data:{id:book.id}
+					},
+					() => 
+					{
+						this.loadBookList();
+						My.close(this.dlg);
+					}
+			);
+		},
+		//执行删除-end
+	
+	//执行批量删除-start
+	booksDelMultiDo()
+	{
+		
+		
+		//js中 undefined 、 null 、 0 都可以自动转化为假（false）
+		if(!this.ids || this.ids.length==0){
+			swal("请选择数据！", "", "info");
+			return;
+		}
+		
+		
+		
+		My.operate(
+				{
+					title:'您确实要删除这些商品信息吗？',
+					text:'如果一旦删除，则无法恢复！',
+					url:'booksDelMultiDo',
+					data:{ids:this.ids}
+				},
+				
+				() => {
+					this.loadBookList();
+					My.close(this.dlg);
+					this.ids=[];//清除数据
+				}
+		
+		);
+	},
+	//执行批量删除-end
+	
+	queryBooks()
+	{
+		My.loadData(
+				{
+					url:'queryBooks',
+					data:this.bks
+				},
+				
+				(data) => { //处理服务器数据的回调函数
+					
+					
+					this.books=data;
+				
+					
+				}
+		);
+	},
+},
+	
+	
+	mounted(){
+		this.loadBookList();
+	}
+		
+	
+});
+
+  
+</script>
+
+</body>
+</html>

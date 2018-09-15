@@ -4,10 +4,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -210,6 +214,19 @@ public class BooksController {
 		
 		
 		
+		return ResultDto.successResult("删锟斤拷锟斤拷品锟斤拷息锟缴癸拷锟斤拷");		
+	}
+	@RequestMapping("/booksBorrowDo")
+	public Object borrowBooks(Integer id, HttpSession session) {
+		String user_id = (String) session.getAttribute("loginUserId");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Integer user_day = MyDao.queryInteger("select maxDay from users where user_account = ?", user_id);
+		Calendar calendar = Calendar.getInstance();
+		Date current = new Date();
+        calendar.setTime(current);
+        calendar.add(Calendar.DATE, user_day);
+		MyDao.update(
+				"insert  into lend(user_id,book_id,ldDat,endDat) values(?, ?,?,?)",user_id ,id,df.format(current) ,calendar.getTime()  );
 		return ResultDto.successResult("删锟斤拷锟斤拷品锟斤拷息锟缴癸拷锟斤拷");
 		
 	}

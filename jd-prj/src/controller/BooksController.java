@@ -51,7 +51,7 @@ public class BooksController {
 		
 		Integer user_id = MyDao.queryInteger("select id from users where user_account = ?", session.getAttribute("loginUserId"));
 		//锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷
-		return MyDao.queryMapList("select * from lend where user_id = ?",user_id);
+		return MyDao.queryMapList("select * from books where id = (select book_id from lend where user_id = ?)",user_id);
 	}
 	
 	@RequestMapping("/queryBooks")

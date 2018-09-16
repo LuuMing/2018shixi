@@ -63,7 +63,6 @@ create table lend
 
 insert into lend(user_id,book_id,ldDat,endDat) values(1,01,"2018-9-6","2018-9-15");
 
-insert into lend(user_id,book_id,ldDat,endDat) values(1,01,"2018-9-7","2018-9-11");
 
 
 select * from lend;

@@ -84,6 +84,30 @@ public class BooksController {
 		
 		return MyDao.queryMapList(sql,list.toArray());
 	}
+	@RequestMapping("/queryBooksBorrow")
+	public Object getGoodsBorrowQueryList(Books gd) {
+		String sql="select g.*,c.type_name "
+				+ "from books g left join book_type c on g.books_type=c.id "
+				+ "where g.Lend=false ";
+		String where="";
+		ArrayList list = new ArrayList();
+		
+		if(gd!=null) {
+			if(gd.getId()!=null) {
+				sql+=" and g.id like ?";
+				list.add("%"+gd.getId()+"%");
+			}
+			if(gd.getName()!=null) {
+				sql+=" and g.name like ?";
+				list.add("%"+gd.getName()+"%");
+			}
+			if(gd.getAuthor()!=null) {
+				sql+=" and g.author like ?";
+				list.add("%"+gd.getAuthor()+"%");
+			}		
+		}	
+		return MyDao.queryMapList(sql,list.toArray());
+	}
 	
 	@RequestMapping("/booksAddDo")
 	public Object addGoods(Books goods) {

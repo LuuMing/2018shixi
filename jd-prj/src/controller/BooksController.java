@@ -39,12 +39,13 @@ public class BooksController {
 		return MyDao.queryMapList("select * from books");
 	}
 	
-	
-/*	@RequestMapping("/goodsList")
-	public Object getGoodsList(Integer cls_id) {
+	@RequestMapping("/loadReserveBookList")
+	public Object getReverseCls() {
 		
-		return MyDao.queryMapList("select * from goods where g_id=?", cls_id);
-	}*/
+		//锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷
+		return MyDao.queryMapList("select * from books where Lend = false");
+	}
+	
 	
 	@RequestMapping("/queryBooks")
 	public Object getGoodsQueryList(Books gd) {
@@ -94,8 +95,8 @@ public class BooksController {
 			MyUtils.save(realpath, bytes);
 			
 			MyDao.update(
-					"insert into " + "books (name,author,books_images) "
-							+ "values(?       ,?    ,?    )",
+					"insert into " + "books (name,author,books_images,Lend) "
+							+ "values(?       ,?    ,?    ,false)",
 					goods.getName(), goods.getAuthor(), fileName);
 			
 			return ResultDto.successResult("锟斤拷锟斤拷锟斤拷品锟斤拷息锟缴癸拷锟斤拷");
@@ -227,8 +228,9 @@ public class BooksController {
         calendar.setTime(current);
         calendar.add(Calendar.DATE, user_day);
 		MyDao.update(
-				"insert  into lend(user_id,book_id,ldDat,endDat) values(?, ?,?,?)",user_id,id,df.format(current) ,calendar.getTime()  );
-		return ResultDto.successResult("借阅成功");
+				"insert  into lend(user_id,book_id,ldDat,endDat) values(?, ?,?,?)",user_id,id,df.format(current) ,calendar.getTime());
+		MyDao.update("update books set Lend = true where id = ?",id);
+		return ResultDto.successResult("OK!");
 		
 	}
 }

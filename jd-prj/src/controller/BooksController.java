@@ -218,16 +218,17 @@ public class BooksController {
 	}
 	@RequestMapping("/booksBorrowDo")
 	public Object borrowBooks(Integer id, HttpSession session) {
-		String user_id = (String) session.getAttribute("loginUserId");
+		String user_account = (String) session.getAttribute("loginUserId");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Integer user_day = MyDao.queryInteger("select maxDay from users where user_account = ?", user_id);
+		Integer user_day = MyDao.queryInteger("select maxDay from users where user_account = ?", user_account);
+		Integer user_id = MyDao.queryInteger("select id from users where user_account = ?", user_account);
 		Calendar calendar = Calendar.getInstance();
 		Date current = new Date();
         calendar.setTime(current);
         calendar.add(Calendar.DATE, user_day);
 		MyDao.update(
-				"insert  into lend(user_id,book_id,ldDat,endDat) values(?, ?,?,?)",user_id ,id,df.format(current) ,calendar.getTime()  );
-		return ResultDto.successResult("删锟斤拷锟斤拷品锟斤拷息锟缴癸拷锟斤拷");
+				"insert  into lend(user_id,book_id,ldDat,endDat) values(?, ?,?,?)",user_id,id,df.format(current) ,calendar.getTime()  );
+		return ResultDto.successResult("借阅成功");
 		
 	}
 }

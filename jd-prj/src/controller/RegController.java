@@ -21,17 +21,18 @@ public class RegController
 		else
 		{
 			int maxCap = 0;
+			int maxDay = 0;
 			Date current =  new java.sql.Date(new java.util.Date().getTime());
 	        Calendar calendar = Calendar.getInstance();
 	        calendar.setTime(current);
 			switch(usr.getUser_type()) 
 			{
-				case "学生" : 	calendar.add(Calendar.YEAR, 1);	 maxCap = 10;				break;
-				case "教师":	calendar.add(Calendar.YEAR, 2);	 maxCap = 30;				   break;
+				case "学生" : 	calendar.add(Calendar.YEAR, 1);	 maxCap = 10;	maxDay = 15;			break;
+				case "教师":	calendar.add(Calendar.YEAR, 2);	 maxCap = 30;		maxDay = 30;		   break;
 				default:			calendar.add(Calendar.YEAR, 1);
 			}
-			MyDao.update("insert into users(user_account,user_name,sex,pwd,usr_type,begDat,endDat,maxCap,cnt) values(?,?,?,?,?,?,?,?,?)", 
-					usr.getUser_account(),usr.getUser_name(),usr.getSex(),usr.getPwd(),usr.getUser_type(),current,calendar.getTime(),maxCap,0);
+			MyDao.update("insert into users(user_account,user_name,sex,pwd,usr_type,begDat,endDat,maxCap,cnt,maxDay) values(?,?,?,?,?,?,?,?,?,?)", 
+					usr.getUser_account(),usr.getUser_name(),usr.getSex(),usr.getPwd(),usr.getUser_type(),current,calendar.getTime(),maxCap,0,maxDay);
 			return ResultDto.successResult("注册成功");
 		}
 	}

@@ -33,7 +33,7 @@ create table books
 	primary key(id)
 );
 
-insert into books(name,author,books_images,books_type,Lend) values ("12334","789","jd0001.jpg",01,false);
+insert into books(name,author,books_images,books_type,Lend) values ("12334","789","jd0001.jpg",01,true);
 
 create table book_type
 (

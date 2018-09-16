@@ -46,6 +46,13 @@ public class BooksController {
 		return MyDao.queryMapList("select * from books where Lend = false");
 	}
 	
+	@RequestMapping("/loadLendBookList")
+	public Object getLendCls(HttpSession session) {
+		
+		Integer user_id = MyDao.queryInteger("select id from users where user_account = ?", session.getAttribute("loginUserId"));
+		//锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷
+		return MyDao.queryMapList("select * from lend where user_id = ?",user_id);
+	}
 	
 	@RequestMapping("/queryBooks")
 	public Object getGoodsQueryList(Books gd) {

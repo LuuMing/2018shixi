@@ -29,10 +29,11 @@ create table books
 	author varchar(50) not null,
 	books_images varchar(100),
         books_type int,
+	Lend boolean,
 	primary key(id)
 );
 
-insert into books(name,author,books_images,books_type) values ("12334","789","jd0001.jpg",01);
+insert into books(name,author,books_images,books_type,Lend) values ("12334","789","jd0001.jpg",01,false);
 
 create table book_type
 (

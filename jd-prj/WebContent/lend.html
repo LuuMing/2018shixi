@@ -51,7 +51,6 @@
 	 			<th>书目编号</th>
 	 			<th style="width:200px;">书目名称</th>
 	 			<th>书目作者</th>
-	 			<th>书目图片</th>
 	 			<th>操作</th>
 	 		</tr>
 	 	
@@ -64,9 +63,8 @@
 	 			<td class="align-middle">{{book.id}}</td>
 	 			<td class="align-middle">{{book.name}}</td>
 	 			<td class="align-middle">{{book.author}}</td>
-	 			<td class="align-middle"><img :src="'images/books?filename='+book.books_images" style="width:50px;" /></td>
 	 			<td class="align-middle">
-	 				<a href="#"  @click="booksBorrow(book)" >借阅</a>
+	 				<a href="#"  @click="booksBorrow(book)" >续借</a>
 	 			</td>
 	 		</tr>
 	 		
